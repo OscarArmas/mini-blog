@@ -1,0 +1,12 @@
+# Hugo default output directory
+public/
+
+# Resource cache directory
+resources/
+
+# Hugo build lock file
+.hugo_build.lock
+
+# Mac system files
+.DS_Store
+
