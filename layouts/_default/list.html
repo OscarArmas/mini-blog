@@ -1,0 +1,58 @@
+{{ define "main" }}
+<header>
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+    <p class="subtitle">{{ .Description }}</p>
+    {{ end }}
+</header>
+
+{{ range .Paginator.Pages }}
+<section>
+    <div class="post-item">
+        <h2 class="post-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+        <div class="post-meta">
+            {{ .Date.Format "2006-01-02" }}
+            {{ if .Params.author }}
+            • {{ .Params.author }}
+            {{ end }}
+            {{ if .ReadingTime }}
+            • {{ .ReadingTime }} min
+            {{ end }}
+        </div>
+        {{ if .Description }}
+        <p class="post-excerpt">{{ .Description }}</p>
+        {{ else }}
+        <p class="post-excerpt">{{ .Summary | truncate 300 }}</p>
+        {{ end }}
+        {{ if .Params.tags }}
+        <div class="post-tags">
+            {{ range .Params.tags }}
+            <span class="tag">#{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+        <a href="{{ .RelPermalink }}" class="post-card-link" style="margin-top: 1rem; display: inline-block;">Leer más →</a>
+    </div>
+</section>
+{{ end }}
+
+{{ if gt .Paginator.TotalPages 1 }}
+<section>
+    <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination-link pagination-prev">← Anterior</a>
+        {{ end }}
+        
+        <span class="pagination-info">
+            {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}
+        </span>
+        
+        {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination-link pagination-next">Siguiente →</a>
+        {{ end }}
+    </nav>
+</section>
+{{ end }}
+{{ end }}

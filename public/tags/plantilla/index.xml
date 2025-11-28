@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plantilla on Mi Mini Blog</title>
+    <link>http://localhost:1313/tags/plantilla/</link>
+    <description>Recent content in Plantilla on Mi Mini Blog</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Thu, 25 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/plantilla/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Características de la Plantilla</title>
+      <link>http://localhost:1313/posts/tercera-entrada/</link>
+      <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/tercera-entrada/</guid>
+      <description>&lt;p&gt;Esta plantilla personalizada incluye muchas características útiles.&lt;/p&gt;&#xA;&lt;h2 id=&#34;características-incluidas&#34;&gt;Características Incluidas&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-diseño-moderno&#34;&gt;1. Diseño Moderno&lt;/h3&gt;&#xA;&lt;p&gt;Un diseño limpio y profesional que hace que tu contenido destaque.&lt;/p&gt;&#xA;&lt;h3 id=&#34;2-navegación-intuitiva&#34;&gt;2. Navegación Intuitiva&lt;/h3&gt;&#xA;&lt;p&gt;Menú de navegación fácil de usar con soporte para dispositivos móviles.&lt;/p&gt;&#xA;&lt;h3 id=&#34;3-soporte-para-tags&#34;&gt;3. Soporte para Tags&lt;/h3&gt;&#xA;&lt;p&gt;Puedes agregar tags a tus posts para organizarlos mejor.&lt;/p&gt;&#xA;&lt;h3 id=&#34;4-navegación-entre-posts&#34;&gt;4. Navegación entre Posts&lt;/h3&gt;&#xA;&lt;p&gt;Enlaces automáticos al post anterior y siguiente en cada entrada.&lt;/p&gt;&#xA;&lt;h3 id=&#34;5-paginación&#34;&gt;5. Paginación&lt;/h3&gt;&#xA;&lt;p&gt;Soporte automático para paginación en listas de posts.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

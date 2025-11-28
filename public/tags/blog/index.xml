@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Mi Mini Blog</title>
+    <link>http://localhost:1313/tags/blog/</link>
+    <description>Recent content in Blog on Mi Mini Blog</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mi Primera Entrada en el Blog</title>
+      <link>http://localhost:1313/posts/primera-entrada/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/primera-entrada/</guid>
+      <description>&lt;p&gt;¡Bienvenido a mi blog personalizado!&lt;/p&gt;&#xA;&lt;p&gt;Este es un ejemplo de cómo se ve una entrada de blog con la plantilla personalizada. La plantilla está diseñada para ser:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Moderno y limpio&lt;/strong&gt;: Diseño minimalista que se enfoca en el contenido&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Responsive&lt;/strong&gt;: Se adapta perfectamente a dispositivos móviles, tablets y escritorio&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Rápido&lt;/strong&gt;: Código optimizado para cargar rápidamente&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Personalizable&lt;/strong&gt;: Fácil de modificar y extender&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;características-principales&#34;&gt;Características Principales&lt;/h2&gt;&#xA;&lt;h3 id=&#34;diseño-responsive&#34;&gt;Diseño Responsive&lt;/h3&gt;&#xA;&lt;p&gt;La plantilla se adapta automáticamente a diferentes tamaños de pantalla, proporcionando una experiencia óptima en todos los dispositivos.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "es" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Site.Title }} | {{ .Site.Params.role_title | default "Staff ML Engineer" }}</title>
+    
+    <!-- Usar CSS principal -->
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
+    <style>
+        /* Estilos específicos solicitados para la Home */
+        
+        /* Override body para centrar y limitar ancho como en el diseño solicitado */
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--bg-color); /* Asegurar uso de variable */
+        }
+
+        /* Ajustes específicos del Header */
+        header {
+            margin-bottom: 6rem;
+            padding-top: 4rem;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666; /* O var(--gray-1) */
+            max-width: 600px;
+        }
+
+        /* Footer específico para la Home */
+        footer {
+            margin-top: 6rem;
+            border-top: 1px solid #ddd;
+            padding-top: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive overrides */
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            header { padding-top: 2rem; margin-bottom: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Hero Section -->
+        <h1>{{ .Site.Params.hero_title | default "First ML/AI Staff Engineer<br>Building High-Scale Systems." | safeHTML }}</h1>
+        <p class="subtitle mono">{{ .Site.Params.hero_description | default "Especializado en Infraestructura MLOps, Sistemas en Tiempo Real y Liderazgo Técnico." }}</p>
+    </header>
+
+    <main class="grid">
+        
+        {{ $pages := where .Site.RegularPages "Type" "posts" }}
+        {{ $limit := .Site.Params.home_posts_limit | default 6 }}
+        
+        {{ range first $limit $pages }}
+        <a href="{{ .RelPermalink }}" class="card">
+            <div>
+                <!-- Contexto / Categoría -->
+                {{ if .Params.context }}
+                <span class="card-context mono">{{ .Params.context }}</span>
+                {{ else if .Params.categories }}
+                <span class="card-context mono">{{ index .Params.categories 0 }}</span>
+                {{ else }}
+                <span class="card-context mono">{{ .Date.Format "2006" }}</span>
+                {{ end }}
+
+                <!-- Métrica destacada -->
+                {{ if .Params.metric }}
+                <span class="card-metric mono">{{ .Params.metric }}</span>
+                {{ end }}
+
+                <h2 class="card-title">{{ .Title }}</h2>
+                
+                <p class="card-desc">
+                    {{ if .Description }}
+                        {{ .Description }}
+                    {{ else }}
+                        {{ .Summary | truncate 120 }}
+                    {{ end }}
+                </p>
+            </div>
+            <span class="card-link mono">
+                {{ if .Params.link_text }}
+                    {{ .Params.link_text }}
+                {{ else }}
+                    Leer más
+                {{ end }}
+            </span>
+        </a>
+        {{ end }}
+
+    </main>
+
+    <footer>
+        {{ if .Site.Params.social }}
+            {{ range .Site.Params.social }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+            {{ end }}
+        {{ else }}
+            <!-- Fallback si no hay social configurado, usando estructura del diseño -->
+            <a href="#">Github</a>
+            <a href="#">LinkedIn</a>
+        {{ end }}
+        
+        <a href="#">Descargar CV Complete (PDF)</a>
+        <span style="margin-left: auto;">© {{ now.Year }}</span>
+    </footer>
+
+</body>
+</html>

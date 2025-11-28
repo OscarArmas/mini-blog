@@ -1,0 +1,67 @@
+# Configuración básica del sitio
+baseURL = 'http://example.org/'
+languageCode = 'es'
+title = 'Mi Mini Blog'
+# theme = 'ananke'  # Tema desactivado - usando plantilla personalizada
+
+# Configuración de menú (opcional)
+[[menu.main]]
+  name = "Inicio"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 2
+
+# Configuración de parámetros
+[params]
+  # Información del autor
+  author = "Tu Nombre"
+  
+  # Título del hero (puede incluir HTML como <br> para saltos de línea)
+  hero_title = "First ML/AI Staff Engineer<br>Building High-Scale Systems."
+  
+  # Descripción del hero (texto adicional debajo del título)
+  hero_description = "Especializado en Infraestructura MLOps, Sistemas en Tiempo Real y Liderazgo Técnico."
+  
+  # Título del rol/profesión (alternativa al hero_subtitle)
+  role_title = "Desarrollador & Escritor"
+  
+  # Descripción del sitio (alternativa al hero_description)
+  description = "Un blog personal creado con Hugo. Diseño minimalista enfocado en el contenido."
+  
+  # Biografía adicional (opcional) - Se muestra si no hay stats
+  # bio = "Texto adicional sobre ti, tu trabajo o tu blog. Puede ser más extenso que la descripción."
+  
+  # Email de contacto (opcional)
+  # email = "tu@email.com"
+  
+  # Mostrar posts recientes en la página principal
+  show_recent_posts = true
+  
+  # Stats Bar (opcional) - Muestra métricas destacadas
+  # [[params.stats]]
+  #   number = "4"
+  #   label = "Años de Experiencia"
+  # [[params.stats]]
+  #   number = "50+"
+  #   label = "Proyectos Completados"
+  # [[params.stats]]
+  #   number = "100%"
+  #   label = "Satisfacción"
+  
+  # Página "Acerca de" (opcional)
+  # about_page = true
+  
+  # Enlaces sociales (opcional)
+  # [[params.social]]
+  #   name = "GitHub"
+  #   url = "https://github.com/tuusuario"
+  # [[params.social]]
+  #   name = "Twitter"
+  #   url = "https://twitter.com/tuusuario"
+  # [[params.social]]
+  #   name = "LinkedIn"
+  #   url = "https://linkedin.com/in/tuusuario"
