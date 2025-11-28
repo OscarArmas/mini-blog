@@ -66,3 +66,7 @@ title = 'Oscar Armas | Staff ML Engineer'
 [[params.social]]
    name = "LinkedIn"
    url = "https://www.linkedin.com/in/oscar-armas/"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
