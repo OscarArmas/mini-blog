@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Establishing engineering best practices, conducting code reviews, and mentoring data scientists to become ML Engineers.">
+    <meta name="description" content="Establishing engineering best practices, conducting code reviews, and part of the staff tecnical desitions.">
     <meta name="author" content="Oscar Armas">
     
     <title>Engineering Culture &amp; Leadership | Oscar Armas</title>
@@ -49,7 +49,7 @@
         • Oscar Armas
         
         
-        • 1 min de lectura
+        • 3 min de lectura
         
     </div>
     
@@ -67,9 +67,38 @@
 
 <section>
     <div class="post-content">
-        <p>As the first ML Engineer in the region, my role wasn&rsquo;t just about code—it was about culture.</p>
+        <p>As the first ML Engineer in the region, How I quickly adapt to the team and pass one of the confidence members for tecnicl desitions</p>
 <h2 id="bridging-the-gap">Bridging the Gap</h2>
-<p>Data Scientists are excellent at statistics but often lack software engineering rigour. My goal was to bridge this gap without stifling creativity.</p>
+<p>Como primer miembro del equipo en la region de LATAM, demostre la calidad e software y trbajo que se puede hacer.</p>
+<p>Mi primer tarea:
+<strong>Deployar una PoC(<a href="https://docs.ray.io/en/latest/serve/index.html">https://docs.ray.io/en/latest/serve/index.html</a>) usanto Ray serving</strong>
+Nada mal para iniciar, pero tomando en cuenta que necesitabamos deployar todo de manera estandarizada en kubernetes, no esta tan complicado cuando existe un equipo Dedicado a mantener los clusters de EKS, veamos como es el flujo de trabajo ideal:</p>
+<p>Segunda Tarea:
+<strong>Deployar servicios de NLP calsifition&hellip;</strong>
+Para esta tarea en un inicio queriamos desplegar dos workflows de Ml &amp; NLP
+para NER y Clasificaion de documentos&hellip;</p>
+<p>Mi consulta consistio en entender cuanto nos costaria desployar estos modelos y cual seria a mejor forma de deployarlos dados todas las infras que tenemos&hellip; en resumen tenemos forma de desplegar usando:</p>
+<ul>
+<li>Sagemaker</li>
+<li>Lambdas</li>
+<li>Fargate Platform</li>
+<li>Kuberay(Kubernetes)</li>
+<li>Triton Serving</li>
+</ul>
+<p>Mi investigacion concluyo lo siguiente, no importa en que region estes, los Data scientists siempre tendran poco interes en donde deployar sus modelos, pero cuando hablamos de NLP, Asumiran que si modelo necesita GPU&hellip;</p>
+<p>Mi metodologia de decision fue la siguiente:
+1. Trafico esperado?
+2. Trafico continuo las 24 Hrs?
+3. Modelos optimizados apra CPU o GPU
+4. Tamanio de los artefactos, tipo de modelo</p>
+<p>El resultado final? Pasaron todos de querer usar kuberay para desplegar el modelos a volter hacia Lamdas, los modelos eran muy ligeros, incluso algunos pip instalables y de esa manera pudismo desplegar exitisamente las lambdas&hellip;
+Aunque no termino Ahi tuvimos que rediseniar la forma en la que se desplegarian las lambdas porque estos servicios serian customer front, entonces el nivel de control y estandarizacion que necesitabamos debia ser robusto <strong>How to deploy lambdas best practices</strong></p>
+<p>Tercer Tarea:
+Como contratar buenos Ingenieros, parte tambien de mi tiempo era enfocado en mejorar y rediseniar la forma de contratacion para mid -&gt; Sr enginners, tanto data scientist como ML Engineers o Data Engineers.</p>
+<p>Itere una metodologia para esto <strong>How to Hire Sr Engineers</strong></p>
+<p>Hackatones:
+AI Medusa!
+Un chatbot enfocada en analizar e infromar a los DS u otros ingenieros, sobre como deployar sus modelos, esto era compatible como un comando de VS Code</p>
 <h3 id="initiatives">Initiatives</h3>
 <ul>
 <li><strong>RFC Process</strong>: We implemented a &ldquo;Request for Comments&rdquo; process for all major architectural decisions.</li>

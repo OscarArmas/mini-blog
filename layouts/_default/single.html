@@ -32,13 +32,13 @@
     <nav class="post-navigation">
         {{ with .PrevInSection }}
         <div class="nav-previous">
-            <span class="nav-label">← Anterior</span>
+            <span class="nav-label">← Previous</span>
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </div>
         {{ end }}
         {{ with .NextInSection }}
         <div class="nav-next">
-            <span class="nav-label">Siguiente →</span>
+            <span class="nav-label">Next →</span>
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </div>
         {{ end }}

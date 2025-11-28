@@ -24,19 +24,19 @@ title = 'Oscar Armas'
   hero_title = "Building High-Scale<br>ML Infrastructure<br>That Ships."
   
   # Hero Description (text below title)
-  hero_description = "Specialized in MLOps platforms, real-time inference systems, and technical leadership. Focused on the unglamorous work that makes AI production-ready."
+  hero_description = "Specialized in MLOps platforms, RAG, real-time inference systems, and technical leadership. Focused on the unglamorous work that makes AI production-ready."
   
   # Role Title (alternative to hero_subtitle)
   role_title = "Staff ML Engineer"
   
   # Site Description (SEO)
-  description = "Personal blog built with Hugo. Minimalist design focused on content."
+  description = "Personal blog Specialized in ML, RAG and AI workflows."
   
   # Additional Bio (optional) - Shows if stats are not present
   # bio = "Additional text about you, your work, or your blog."
   
   # Contact Email (optional)
-  # email = "oarmas.exe@gmail.com"
+  # email = "saga_cth.hotmail.com"
   
   # Show recent posts on homepage
   show_recent_posts = true
