@@ -36,33 +36,33 @@ title = 'Oscar Armas | Staff ML Engineer'
   # bio = "Additional text about you, your work, or your blog."
   
   # Contact Email (optional)
-  # email = "you@email.com"
+  # email = "oarmas.exe@gmail.com"
   
   # Show recent posts on homepage
   show_recent_posts = true
   
   # Stats Bar (optional) - Shows highlighted metrics
   # If commented out, it uses the default "Demo" stats from the template
-  # [[params.stats]]
-  #   number = "6"
-  #   label = "Years of Experience"
-  # [[params.stats]]
-  #   number = "50+"
-  #   label = "Projects Completed"
-  # [[params.stats]]
-  #   number = "100%"
-  #   label = "Satisfaction"
+ [[params.stats]]
+   number = "6"
+   label = "Years of Experience"
+ [[params.stats]]
+   number = "20+"
+   label = "Projects Completed"
+ [[params.stats]]
+   number = "3"
+   label = "0→1 PLATFORMS"
   
   # About Page (optional)
   # about_page = true
   
-  # Social Links (optional)
-  # [[params.social]]
-  #   name = "GitHub"
-  #   url = "https://github.com/yourusername"
-  # [[params.social]]
-  #   name = "Twitter"
-  #   url = "https://twitter.com/yourusername"
-  # [[params.social]]
-  #   name = "LinkedIn"
-  #   url = "https://linkedin.com/in/yourusername"
+# Social Links (optional)
+[[params.social]]
+   name = "GitHub"
+   url = "https://github.com/OscarArmas"
+[[params.social]]
+   name = "Twitter"
+   url = "https://twitter.com/yourusername"
+[[params.social]]
+   name = "LinkedIn"
+   url = "https://www.linkedin.com/in/oscar-armas/"
