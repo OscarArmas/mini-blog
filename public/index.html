@@ -6,194 +6,567 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Mini Blog | Desarrollador &amp; Escritor</title>
     
-    
-    <link rel="stylesheet" href="/css/main.css">
-
     <style>
          
-        
+        :root {
+            --bg: #FAFAFA;
+            --ink: #0A0A0A;
+            --gray-1: #666666;
+            --gray-2: #999999;
+            --gray-3: #E0E0E0;
+            
+             
+            --realtime: #E63946;       
+            --platform: #457B9D;       
+            --leadership: #2A9D8F;     
+            --default-cat: #333333;    
+            
+            --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            --font-mono: "SF Mono", "Monaco", "Consolas", monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
          
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            max-width: 1200px;
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-display);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+         
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
-            background-color: var(--bg-color);  
+            padding: 3rem 2rem;
         }
 
          
         header {
-            margin-bottom: 6rem;
+            margin-bottom: 6rem;  
             padding-top: 4rem;
-            border-bottom: 2px solid var(--text-color);
-            padding-bottom: 2rem;
+        }
+
+        .name-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-2);
+            margin-bottom: 1rem;
+            display: block;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
+            font-size: clamp(2.5rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            max-width: 900px;
+        }
+
+         
+        h1::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: var(--ink);
+            margin-top: 2rem;
         }
 
         .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--gray-1);
+            max-width: 650px;
+            margin-top: 2rem;
+            line-height: 1.6;
+        }
+
+         
+        .projects-grid {
+            display: grid;
+             
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+         
+        .card {
+            border: 2px solid var(--ink);
+            padding: 2.5rem;  
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            background: var(--bg);
+            cursor: pointer;
+            overflow: hidden;
+             
+            --category-color: var(--default-cat);
+        }
+
+         
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--category-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out-expo);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+         
+        .card:hover {
+            transform: translate(-6px, -6px);
+            box-shadow: 10px 10px 0px var(--category-color);
+        }
+
+         
+        .card[data-category="realtime"] { --category-color: var(--realtime); }
+        .card[data-category="platform"] { --category-color: var(--platform); }
+        .card[data-category="leadership"] { --category-color: var(--leadership); }
+         
+        .card[data-category="infra"] { --category-color: var(--realtime); }
+        .card[data-category="mlops"] { --category-color: var(--platform); }
+        .card[data-category="culture"] { --category-color: var(--leadership); }
+
+         
+        .card-header {
+            margin-bottom: 2rem;
+        }
+
+        .card-context {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--category-color);
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 600;
+        }
+
+         
+        .card-metric-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-metric {
+            font-size: clamp(3rem, 15vw, 4.5rem);  
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+            color: var(--ink);
+        }
+
+        .card-metric-unit {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--gray-1);
+            align-self: flex-end;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .card-desc {
+            font-size: 1.05rem;
+            color: var(--gray-1);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+         
+        .card-metadata {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--gray-2);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s var(--ease-in-out);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-3);
+        }
+
+        .card:hover .card-metadata {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-metadata-item {
+            display: inline-block;
+            margin-right: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-link {
+            margin-top: auto;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            color: var(--category-color);
+            transition: gap 0.3s var(--ease-out-expo);
+            gap: 0.5rem;
+        }
+
+        .card-link::after {
+            content: "→";
             font-size: 1.2rem;
-            color: #666;  
-            max-width: 600px;
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .card:hover .card-link::after {
+            transform: translateX(4px);
+        }
+
+         
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            margin: 4rem 0;
+            border-top: 1px solid var(--gray-3);
+            border-bottom: 1px solid var(--gray-3);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-1);
         }
 
          
         footer {
-            margin-top: 6rem;
-            border-top: 1px solid #ddd;
-            padding-top: 2rem;
+            margin-top: 8rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--ink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
             display: flex;
             gap: 2rem;
         }
-        
-        footer a:hover { text-decoration: underline; }
+
+        footer a {
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ink);
+            transition: width 0.3s var(--ease-out-expo);
+        }
+
+        footer a:hover::after {
+            width: 100%;
+        }
 
          
-        @media (max-width: 768px) {
-            body { padding: 1rem; }
-            header { padding-top: 2rem; margin-bottom: 3rem; }
+        @media (max-width: 1024px) {
+            .stats-bar {
+                flex-direction: column;
+                gap: 2rem;
+            }
         }
+
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1.5rem; }
+            header { margin-bottom: 4rem; }
+            .card { padding: 2rem; min-height: 320px; }
+             
+            footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+            
+            h1 { font-size: 2.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+         
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header { animation: fadeInUp 0.8s var(--ease-out-expo); }
+        .card { animation: fadeInUp 0.8s var(--ease-out-expo) backwards; }
+         
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
 
-    <header>
+    <div class="container">
         
-        <h1>First ML/AI Staff Engineer<br>Building High-Scale Systems.</h1>
-        <p class="subtitle mono">Especializado en Infraestructura MLOps, Sistemas en Tiempo Real y Liderazgo Técnico.</p>
-    </header>
+        <header>
+            <span class="name-badge">Oscar Armas · Desarrollador &amp; Escritor</span>
+            <h1>First ML/AI Staff Engineer<br>Building High-Scale Systems.</h1>
+            <p class="subtitle">
+                Especializado en Infraestructura MLOps, Sistemas en Tiempo Real y Liderazgo Técnico.
+            </p>
+        </header>
 
-    <main class="grid">
         
-        
-        
-        
-        
-        <a href="/posts/tercera-entrada/" class="card">
-            <div>
-                
-                
-                <span class="card-context mono">Features · Plantilla</span>
-                
-
-                
-                
-                <span class="card-metric mono">10&#43;</span>
-                
-
-                <h2 class="card-title">Características de la Plantilla</h2>
-                
-                <p class="card-desc">
-                    
-                        Descubre todas las características de esta plantilla personalizada. Grid asimétrica, cards interactivas y más.
-                    
-                </p>
-            </div>
-            <span class="card-link mono">
-                
-                    Leer más
-                
-            </span>
-        </a>
-        
-        <a href="/posts/segunda-entrada/" class="card">
-            <div>
-                
-                
-                <span class="card-context mono">Tutorial · Personalización</span>
-                
-
-                
-                
-                <span class="card-metric mono">100%</span>
-                
-
-                <h2 class="card-title">Cómo Personalizar tu Blog</h2>
-                
-                <p class="card-desc">
-                    
-                        Guía rápida para personalizar tu blog de Hugo. Aprende a modificar colores, tipografías y layouts.
-                    
-                </p>
-            </div>
-            <span class="card-link mono">
-                
-                    Leer más
-                
-            </span>
-        </a>
-        
-        <a href="/posts/primera-entrada/" class="card">
-            <div>
-                
-                
-                <span class="card-context mono">Blog · Primera Entrada</span>
-                
-
-                
-                
-                <span class="card-metric mono">1st</span>
-                
-
-                <h2 class="card-title">Mi Primera Entrada en el Blog</h2>
-                
-                <p class="card-desc">
-                    
-                        Esta es mi primera entrada en el blog personalizado con Hugo. Descubre cómo crear un blog moderno y profesional.
-                    
-                </p>
-            </div>
-            <span class="card-link mono">
-                
-                    Leer más
-                
-            </span>
-        </a>
-        
-        <a href="/posts/cuarta-entrada/" class="card">
-            <div>
-                
-                
-                <span class="card-context mono">0001</span>
-                
-
-                
-                
-
-                <h2 class="card-title"></h2>
-                
-                <p class="card-desc">
-                    
-                        
-                    
-                </p>
-            </div>
-            <span class="card-link mono">
-                
-                    Leer más
-                
-            </span>
-        </a>
-        
-
-    </main>
-
-    <footer>
-        
+        <div class="stats-bar">
             
-            <a href="#">Github</a>
-            <a href="#">LinkedIn</a>
+                
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Years Production ML</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">RPS Sustained</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">0→1 Platforms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Models Deployed</span>
+                </div>
+            
+        </div>
+
         
-        
-        <a href="#">Descargar CV Complete (PDF)</a>
-        <span style="margin-left: auto;">© 2025</span>
-    </footer>
+        <main class="projects-grid">
+            
+            
+            
+            
+            
+            
+            <a href="/posts/tercera-entrada/" class="card" data-category="realtime">
+                <div class="card-header">
+                    <span class="card-context">
+                        
+                            Features · Plantilla
+                        
+                    </span>
+                    
+                    
+                    <div class="card-metric-wrapper">
+                        <span class="card-metric">10&#43;</span>
+                        
+                        <span class="card-metric-unit">Features</span>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div>
+                    <h2 class="card-title">Características de la Plantilla</h2>
+                    <p class="card-desc">
+                        
+                            Descubre todas las características de esta plantilla personalizada. Grid asimétrica, cards interactivas y más.
+                        
+                    </p>
+                    
+                    <div class="card-metadata">
+                        
+                        
+                        <span class="card-metadata-item">Jan 2024</span>
+                    </div>
+                </div>
+                
+                <span class="card-link">
+                    
+                        Leer más
+                    
+                </span>
+            </a>
+            
+            
+            <a href="/posts/segunda-entrada/" class="card" data-category="leadership">
+                <div class="card-header">
+                    <span class="card-context">
+                        
+                            Tutorial · Personalización
+                        
+                    </span>
+                    
+                    
+                    <div class="card-metric-wrapper">
+                        <span class="card-metric">100%</span>
+                        
+                        <span class="card-metric-unit">Customizable</span>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div>
+                    <h2 class="card-title">Cómo Personalizar tu Blog</h2>
+                    <p class="card-desc">
+                        
+                            Guía rápida para personalizar tu blog de Hugo. Aprende a modificar colores, tipografías y layouts.
+                        
+                    </p>
+                    
+                    <div class="card-metadata">
+                        
+                        
+                        <span class="card-metadata-item">Jan 2024</span>
+                    </div>
+                </div>
+                
+                <span class="card-link">
+                    
+                        Leer más
+                    
+                </span>
+            </a>
+            
+            
+            <a href="/posts/primera-entrada/" class="card" data-category="platform">
+                <div class="card-header">
+                    <span class="card-context">
+                        
+                            Blog · Primera Entrada
+                        
+                    </span>
+                    
+                    
+                    <div class="card-metric-wrapper">
+                        <span class="card-metric">1st</span>
+                        
+                        <span class="card-metric-unit">Post</span>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div>
+                    <h2 class="card-title">Mi Primera Entrada en el Blog</h2>
+                    <p class="card-desc">
+                        
+                            Esta es mi primera entrada en el blog personalizado con Hugo. Descubre cómo crear un blog moderno y profesional.
+                        
+                    </p>
+                    
+                    <div class="card-metadata">
+                        
+                        
+                        <span class="card-metadata-item">Jan 2024</span>
+                    </div>
+                </div>
+                
+                <span class="card-link">
+                    
+                        Leer más
+                    
+                </span>
+            </a>
+            
+            
+            <a href="/posts/cuarta-entrada/" class="card" data-category="default">
+                <div class="card-header">
+                    <span class="card-context">
+                        
+                             0001 · Blog
+                        
+                    </span>
+                    
+                    
+                </div>
+                
+                <div>
+                    <h2 class="card-title"></h2>
+                    <p class="card-desc">
+                        
+                            
+                        
+                    </p>
+                    
+                    <div class="card-metadata">
+                        
+                        
+                        <span class="card-metadata-item">Jan 0001</span>
+                    </div>
+                </div>
+                
+                <span class="card-link">
+                    
+                        Leer más
+                    
+                </span>
+            </a>
+            
+
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                
+                    <a href="https://github.com/oscarmas" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/oscararmas" target="_blank">LinkedIn</a>
+                    <a href="mailto:434.exe@gmail.com">Email</a>
+                
+                <a href="/cv.pdf" target="_blank">Download CV</a>
+            </div>
+            <span>© 2025</span>
+        </footer>
+
+    </div>
 
 </body>
 </html>
