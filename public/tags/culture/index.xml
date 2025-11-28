@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Culture on Oscar Armas | Staff ML Engineer</title>
+    <link>http://localhost:1313/tags/culture/</link>
+    <description>Recent content in Culture on Oscar Armas | Staff ML Engineer</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/culture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Engineering Culture &amp; Leadership</title>
+      <link>http://localhost:1313/posts/tercera-entrada/</link>
+      <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/tercera-entrada/</guid>
+      <description>&lt;p&gt;As the first ML Engineer in the region, my role wasn&amp;rsquo;t just about code—it was about culture.&lt;/p&gt;&#xA;&lt;h2 id=&#34;bridging-the-gap&#34;&gt;Bridging the Gap&lt;/h2&gt;&#xA;&lt;p&gt;Data Scientists are excellent at statistics but often lack software engineering rigour. My goal was to bridge this gap without stifling creativity.&lt;/p&gt;&#xA;&lt;h3 id=&#34;initiatives&#34;&gt;Initiatives&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;RFC Process&lt;/strong&gt;: We implemented a &amp;ldquo;Request for Comments&amp;rdquo; process for all major architectural decisions.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Pair Programming&lt;/strong&gt;: Weekly sessions where engineers and scientists pair up to refactor notebook code into production-grade modules.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Post-Mortems&lt;/strong&gt;: Blameless retrospectives for every production incident.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;Culture is what happens when you&amp;rsquo;re not in the room.&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

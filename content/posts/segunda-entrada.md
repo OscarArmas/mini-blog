@@ -1,44 +1,40 @@
 ---
-title: "Cómo Personalizar tu Blog"
+title: "Building the MLOps Platform"
 date: 2024-01-20
-author: "Tu Nombre"
-description: "Guía rápida para personalizar tu blog de Hugo. Aprende a modificar colores, tipografías y layouts."
-tags: ["hugo", "personalización", "tutorial"]
-category: "leadership"
-context: "Tutorial · Personalización"
-metric: "100%"
-metric_unit: "Customizable"
+author: "Oscar Armas"
+description: "Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform."
+tags: ["platform", "mlops", "infrastructure"]
+category: "platform"
+context: "Platform · MLOps"
+metric: "0→1"
+metric_unit: "Zero to One"
 ---
 
-En esta entrada, te mostraré cómo puedes personalizar fácilmente tu blog.
+Building a platform from scratch is about standardization and developer experience.
 
-## Cambiar Colores
+## The Problem
 
-Los colores están definidos en variables CSS al inicio del archivo `static/css/main.css`. Puedes modificar:
+Every data science team was deploying models differently. Some used Flask on EC2, others used Lambda, and some were just running notebooks manually.
 
-```css
-:root {
-    --color-primary: #2563eb;
-    --color-primary-dark: #1e40af;
-    --color-secondary: #64748b;
-    /* ... más colores ... */
+## The Solution
+
+We built a centralized platform on top of Databricks and AWS.
+
+### Key Components
+
+1.  **Feature Store**: Centralized feature definitions using Feast.
+2.  **Model Registry**: MLflow for versioning and stage management.
+3.  **Deployment Pipelines**: GitHub Actions + Terraform to provision serving infrastructure automatically.
+
+```hcl
+module "inference_service" {
+  source = "./modules/inference"
+  
+  model_name = "fraud-detection"
+  version    = "v2.1.0"
+  min_instances = 2
+  max_instances = 10
 }
 ```
 
-## Modificar la Configuración
-
-Edita el archivo `hugo.toml` para cambiar:
-
-- Título del sitio
-- Descripción
-- Información del autor
-- Y mucho más
-
-## Agregar Nuevas Secciones
-
-Puedes crear nuevas páginas agregando archivos en el directorio `content/` y creando plantillas personalizadas en `layouts/`.
-
-## Conclusión
-
-Personalizar tu blog es muy sencillo. Solo necesitas modificar los archivos de plantilla y CSS según tus necesidades.
-
+This reduced the "time-to-production" from weeks to hours.

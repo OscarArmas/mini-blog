@@ -1,67 +1,40 @@
 ---
-title: "Mi Primera Entrada en el Blog"
+title: "Low-Latency Inference at Scale"
 date: 2024-01-15
-author: "Tu Nombre"
-description: "Esta es mi primera entrada en el blog personalizado con Hugo. Descubre cómo crear un blog moderno y profesional."
-tags: ["hugo", "blog", "personalizado"]
-category: "platform"
-context: "Blog · Primera Entrada"
-metric: "1st"
-metric_unit: "Post"
+author: "Oscar Armas"
+description: "How we architected a high-throughput prediction service handling 200+ RPS with <100ms latency using Go and Triton."
+tags: ["mlops", "realtime", "golang"]
+category: "realtime"
+context: "Rappi · Real-Time"
+metric: "<100ms"
+metric_unit: "Latency p99"
 ---
 
-¡Bienvenido a mi blog personalizado!
+This is a sample post demonstrating the "Real-Time" category style.
 
-Este es un ejemplo de cómo se ve una entrada de blog con la plantilla personalizada. La plantilla está diseñada para ser:
+## The Challenge
 
-- **Moderno y limpio**: Diseño minimalista que se enfoca en el contenido
-- **Responsive**: Se adapta perfectamente a dispositivos móviles, tablets y escritorio
-- **Rápido**: Código optimizado para cargar rápidamente
-- **Personalizable**: Fácil de modificar y extender
+Deploying heavy transformer models for real-time fraud detection requires a robust infrastructure. We needed to serve predictions in under 100ms to avoid blocking the user checkout flow.
 
-## Características Principales
+### Architecture Choices
 
-### Diseño Responsive
+We moved from a Python-based Flask service to a high-performance Go gateway communicating with NVIDIA Triton Inference Server via gRPC.
 
-La plantilla se adapta automáticamente a diferentes tamaños de pantalla, proporcionando una experiencia óptima en todos los dispositivos.
-
-### Tipografía Legible
-
-Utilizamos fuentes del sistema que son rápidas de cargar y fáciles de leer, con un tamaño de línea adecuado para una lectura cómoda.
-
-### Navegación Intuitiva
-
-El menú de navegación es claro y fácil de usar, con un menú hamburguesa en dispositivos móviles.
-
-## Código de Ejemplo
-
-Aquí tienes un ejemplo de código:
-
-```javascript
-function saludar(nombre) {
-    console.log(`¡Hola, ${nombre}!`);
+```go
+func (s *Server) Predict(ctx context.Context, req *pb.Request) (*pb.Response, error) {
+    // High-performance gRPC call to Triton
+    resp, err := s.tritonClient.Infer(ctx, modelName, inputs)
+    if err != nil {
+        return nil, fmt.Errorf("inference failed: %w", err)
+    }
+    return processResponse(resp), nil
 }
-
-saludar("Mundo");
 ```
 
-## Listas
+## Results
 
-Puedes crear listas ordenadas:
+- **Latency**: Reduced p99 from 450ms to 85ms.
+- **Throughput**: Increased capacity by 4x with the same hardware.
+- **Cost**: Reduced compute costs by 30%.
 
-1. Primer elemento
-2. Segundo elemento
-3. Tercer elemento
-
-O listas no ordenadas:
-
-- Elemento uno
-- Elemento dos
-- Elemento tres
-
-## Citas
-
-> "El diseño no es solo cómo se ve y cómo se siente. El diseño es cómo funciona." - Steve Jobs
-
-¡Espero que disfrutes usando esta plantilla personalizada!
-
+This architecture became the standard for all real-time ML services in the company.

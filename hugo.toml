@@ -1,12 +1,12 @@
-# Configuración básica del sitio
+# Site Configuration
 baseURL = 'http://example.org/'
-languageCode = 'es'
-title = 'Mi Mini Blog'
-# theme = 'ananke'  # Tema desactivado - usando plantilla personalizada
+languageCode = 'en'
+title = 'Oscar Armas | Staff ML Engineer'
+# theme = 'ananke'  # Theme disabled - using custom template
 
-# Configuración de menú (opcional)
+# Menu Configuration (optional)
 [[menu.main]]
-  name = "Inicio"
+  name = "Home"
   url = "/"
   weight = 1
 
@@ -15,53 +15,54 @@ title = 'Mi Mini Blog'
   url = "/posts/"
   weight = 2
 
-# Configuración de parámetros
+# Params Configuration
 [params]
-  # Información del autor
-  author = "Tu Nombre"
+  # Author Information
+  author = "Oscar Armas"
   
-  # Título del hero (puede incluir HTML como <br> para saltos de línea)
-  hero_title = "First ML/AI Staff Engineer<br>Building High-Scale Systems."
+  # Hero Title (can include HTML like <br> for line breaks)
+  hero_title = "Building High-Scale<br>ML Infrastructure<br>That Ships."
   
-  # Descripción del hero (texto adicional debajo del título)
-  hero_description = "Especializado en Infraestructura MLOps, Sistemas en Tiempo Real y Liderazgo Técnico."
+  # Hero Description (text below title)
+  hero_description = "Specialized in MLOps platforms, real-time inference systems, and technical leadership. Focused on the unglamorous work that makes AI production-ready."
   
-  # Título del rol/profesión (alternativa al hero_subtitle)
-  role_title = "Desarrollador & Escritor"
+  # Role Title (alternative to hero_subtitle)
+  role_title = "Staff ML Engineer"
   
-  # Descripción del sitio (alternativa al hero_description)
-  description = "Un blog personal creado con Hugo. Diseño minimalista enfocado en el contenido."
+  # Site Description (SEO)
+  description = "Personal blog built with Hugo. Minimalist design focused on content."
   
-  # Biografía adicional (opcional) - Se muestra si no hay stats
-  # bio = "Texto adicional sobre ti, tu trabajo o tu blog. Puede ser más extenso que la descripción."
+  # Additional Bio (optional) - Shows if stats are not present
+  # bio = "Additional text about you, your work, or your blog."
   
-  # Email de contacto (opcional)
-  # email = "tu@email.com"
+  # Contact Email (optional)
+  # email = "you@email.com"
   
-  # Mostrar posts recientes en la página principal
+  # Show recent posts on homepage
   show_recent_posts = true
   
-  # Stats Bar (opcional) - Muestra métricas destacadas
+  # Stats Bar (optional) - Shows highlighted metrics
+  # If commented out, it uses the default "Demo" stats from the template
   # [[params.stats]]
-  #   number = "4"
-  #   label = "Años de Experiencia"
+  #   number = "6"
+  #   label = "Years of Experience"
   # [[params.stats]]
   #   number = "50+"
-  #   label = "Proyectos Completados"
+  #   label = "Projects Completed"
   # [[params.stats]]
   #   number = "100%"
-  #   label = "Satisfacción"
+  #   label = "Satisfaction"
   
-  # Página "Acerca de" (opcional)
+  # About Page (optional)
   # about_page = true
   
-  # Enlaces sociales (opcional)
+  # Social Links (optional)
   # [[params.social]]
   #   name = "GitHub"
-  #   url = "https://github.com/tuusuario"
+  #   url = "https://github.com/yourusername"
   # [[params.social]]
   #   name = "Twitter"
-  #   url = "https://twitter.com/tuusuario"
+  #   url = "https://twitter.com/yourusername"
   # [[params.social]]
   #   name = "LinkedIn"
-  #   url = "https://linkedin.com/in/tuusuario"
+  #   url = "https://linkedin.com/in/yourusername"

@@ -361,17 +361,17 @@
             <p class="subtitle">
                 {{ .Site.Params.hero_description | default "Specialized in MLOps platforms, real-time inference systems, and technical leadership. Focused on the unglamorous work that makes AI production-ready." }}
             </p>
-        </header>
+</header>
 
         <!-- STATS BAR -->
         <div class="stats-bar">
-            {{ if .Site.Params.stats }}
-                {{ range .Site.Params.stats }}
-                <div class="stat-item">
-                    <span class="stat-number">{{ .number }}</span>
-                    <span class="stat-label">{{ .label }}</span>
-                </div>
-                {{ end }}
+{{ if .Site.Params.stats }}
+    {{ range .Site.Params.stats }}
+    <div class="stat-item">
+        <span class="stat-number">{{ .number }}</span>
+        <span class="stat-label">{{ .label }}</span>
+    </div>
+    {{ end }}
             {{ else }}
                 <!-- Fallback/Demo stats si no están configuradas -->
                 <div class="stat-item">
@@ -381,15 +381,15 @@
                 <div class="stat-item">
                     <span class="stat-number">200+</span>
                     <span class="stat-label">RPS Sustained</span>
-                </div>
+</div>
                 <div class="stat-item">
                     <span class="stat-number">3</span>
                     <span class="stat-label">0→1 Platforms</span>
-                </div>
+    </div>
                 <div class="stat-item">
                     <span class="stat-number">15+</span>
                     <span class="stat-label">Models Deployed</span>
-                </div>
+            </div>
             {{ end }}
         </div>
 
@@ -408,7 +408,7 @@
                             {{ .Params.context }}
                         {{ else }}
                              {{ .Date.Format "2006" }} · {{ .Params.category | default "Blog" }}
-                        {{ end }}
+                {{ end }}
                     </span>
                     
                     {{ if .Params.metric }}
@@ -416,11 +416,11 @@
                         <span class="card-metric">{{ .Params.metric }}</span>
                         {{ if .Params.metric_unit }}
                         <span class="card-metric-unit">{{ .Params.metric_unit }}</span>
-                        {{ end }}
-                    </div>
-                    {{ end }}
-                </div>
-                
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        
                 <div>
                     <h2 class="card-title">{{ .Title }}</h2>
                     <p class="card-desc">
@@ -428,7 +428,7 @@
                             {{ .Description }}
                         {{ else }}
                             {{ .Summary | truncate 120 }}
-                        {{ end }}
+    {{ end }}
                     </p>
                     
                     <div class="card-metadata">
@@ -440,35 +440,35 @@
                         {{ end }}
                         <span class="card-metadata-item">{{ .Date.Format "Jan 2006" }}</span>
                     </div>
-                </div>
+</div>
                 
                 <span class="card-link">
                     {{ if .Params.link_text }}
                         {{ .Params.link_text }}
                     {{ else }}
-                        Leer más
-                    {{ end }}
+                        Read more
+{{ end }}
                 </span>
             </a>
-            {{ end }}
+{{ end }}
 
         </main>
 
         <footer>
             <div class="footer-links">
-                {{ if .Site.Params.social }}
-                    {{ range .Site.Params.social }}
-                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
-                    {{ end }}
+{{ if .Site.Params.social }}
+        {{ range .Site.Params.social }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+        {{ end }}
                 {{ else }}
                     <a href="https://github.com/oscarmas" target="_blank">GitHub</a>
                     <a href="https://linkedin.com/in/oscararmas" target="_blank">LinkedIn</a>
                     <a href="mailto:434.exe@gmail.com">Email</a>
-                {{ end }}
+        {{ end }}
                 <a href="/cv.pdf" target="_blank">Download CV</a>
-            </div>
-            <span>© {{ now.Year }}</span>
-        </footer>
+    </div>
+    <span>© {{ now.Year }}</span>
+</footer>
 
     </div>
 

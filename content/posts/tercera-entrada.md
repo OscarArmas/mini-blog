@@ -1,42 +1,27 @@
 ---
-title: "Características de la Plantilla"
+title: "Engineering Culture & Leadership"
 date: 2024-01-25
-author: "Tu Nombre"
-description: "Descubre todas las características de esta plantilla personalizada. Grid asimétrica, cards interactivas y más."
-tags: ["características", "plantilla", "hugo"]
-category: "realtime"
-context: "Features · Plantilla"
-metric: "10+"
-metric_unit: "Features"
+author: "Oscar Armas"
+description: "Establishing engineering best practices, conducting code reviews, and mentoring data scientists to become ML Engineers."
+tags: ["leadership", "culture", "mentorship"]
+category: "leadership"
+context: "Culture · Leadership"
+metric: "1st"
+metric_unit: "ML Engineer"
 ---
 
-Esta plantilla personalizada incluye muchas características útiles.
+As the first ML Engineer in the region, my role wasn't just about code—it was about culture.
 
-## Características Incluidas
+## Bridging the Gap
 
-### 1. Diseño Moderno
+Data Scientists are excellent at statistics but often lack software engineering rigour. My goal was to bridge this gap without stifling creativity.
 
-Un diseño limpio y profesional que hace que tu contenido destaque.
+### Initiatives
 
-### 2. Navegación Intuitiva
+- **RFC Process**: We implemented a "Request for Comments" process for all major architectural decisions.
+- **Pair Programming**: Weekly sessions where engineers and scientists pair up to refactor notebook code into production-grade modules.
+- **Post-Mortems**: Blameless retrospectives for every production incident.
 
-Menú de navegación fácil de usar con soporte para dispositivos móviles.
+> "Culture is what happens when you're not in the room."
 
-### 3. Soporte para Tags
-
-Puedes agregar tags a tus posts para organizarlos mejor.
-
-### 4. Navegación entre Posts
-
-Enlaces automáticos al post anterior y siguiente en cada entrada.
-
-### 5. Paginación
-
-Soporte automático para paginación en listas de posts.
-
-## Personalización Fácil
-
-Todas las características son fáciles de personalizar editando los archivos de plantilla y CSS.
-
-¡Disfruta creando contenido con esta plantilla!
-
+By establishing these practices, we scaled from 1 to 4 distributed squads while maintaining code quality.
