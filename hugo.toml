@@ -1,7 +1,7 @@
 # Site Configuration
 baseURL = 'http://example.org/'
 languageCode = 'en'
-title = 'Oscar Armas | Staff ML Engineer'
+title = 'Oscar Armas'
 # theme = 'ananke'  # Theme disabled - using custom template
 
 # Menu Configuration (optional)
