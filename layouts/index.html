@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }} | {{ .Site.Params.role_title | default "Staff ML Engineer" }}</title>
     
+    <script>
+        // Prevenir FOUC (Flash of Unstyled Content)
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
     <style>
         /* --- VARIABLES CON SEMÁNTICA --- */
         :root {
+            /* Tema CLARO (Por defecto) */
             --bg: #FAFAFA;
             --ink: #0A0A0A;
+            --card-bg: #FFFFFF;
             --gray-1: #666666;
             --gray-2: #999999;
             --gray-3: #E0E0E0;
+            --link-color: #2A9D8F; /* Color para links en bio */
             
             /* CATEGORÍAS DE TRABAJO (Color como información) */
             --realtime: #E63946;      /* Rojo = urgencia, velocidad */
@@ -27,6 +42,23 @@
             --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
         }
 
+        /* Tema OSCURO */
+        [data-theme="dark"] {
+            --bg: #0F0F0F;
+            --ink: #F0F0F0;
+            --card-bg: #1A1A1A;
+            --gray-1: #A0A0A0;
+            --gray-2: #777777;
+            --gray-3: #333333;
+            --link-color: #4DB6AC;
+
+            /* Ajustes de categorías para mejor contraste en oscuro */
+            --realtime: #FF6B6B;
+            --platform: #64B5F6;
+            --leadership: #4DB6AC;
+            --default-cat: #CCCCCC;
+        }
+
         /* --- RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -37,6 +69,7 @@
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s; /* Suavizar cambio de tema */
         }
 
         a { text-decoration: none; color: inherit; }
@@ -46,78 +79,112 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 3rem 2rem;
+            position: relative; /* Para posicionar el toggle */
         }
 
-        /* --- HEADER EDITORIAL --- */
-        header {
-            margin-bottom: 6rem; /* Ajustado un poco para balance */
-            padding-top: 4rem;
-        }
-
-        .name-badge {
+        /* --- THEME TOGGLE --- */
+        .theme-toggle {
+            position: absolute;
+            top: 3rem;
+            right: 2rem;
+            background: none;
+            border: 2px solid var(--ink); /* Estilo acorde a las cards */
+            color: var(--ink);
+            padding: 0.5rem 1rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gray-2);
-            margin-bottom: 1rem;
-            display: block;
+            letter-spacing: 0.1em;
+            transition: all 0.2s var(--ease-out-expo);
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 900;
-            line-height: 0.95;
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px var(--gray-2);
+        }
+
+        /* --- HEADER AMIGABLE (Mantenido según petición) --- */
+        header {
+            margin-bottom: 6rem;
+            max-width: 800px;
+            padding-top: 2rem;
+        }
+
+        .friendly-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem); /* Ligeramente más grande para balancear con las cards */
+            font-weight: 800;
             letter-spacing: -0.03em;
-            margin-bottom: 2rem;
-            max-width: 900px;
+            margin-bottom: 2.5rem;
+            color: var(--ink);
+            line-height: 1.1;
         }
 
-        /* Línea de separación visual fuerte */
-        h1::after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: var(--ink);
-            margin-top: 2rem;
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+        .friendly-bio {
+            font-size: 1.1rem;
             color: var(--gray-1);
-            max-width: 650px;
-            margin-top: 2rem;
-            line-height: 1.6;
+            line-height: 1.8;
+        }
+        
+        .friendly-bio p {
+            margin-bottom: 1rem; /* Reducido de 1.5rem a 1rem */
+            max-width: 65ch;
         }
 
-        /* --- GRID UNIFORME (Modificado según petición) --- */
+        /* Estilos para enlaces dentro de la bio */
+        .friendly-bio a {
+            color: var(--link-color);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: all 0.2s;
+        }
+        
+        .friendly-bio a:hover {
+            background-color: rgba(42, 157, 143, 0.1); /* Sutil highlight al hover */
+            text-decoration-thickness: 2px;
+        }
+
+        /* --- GRID UNIFORME --- */
         .projects-grid {
             display: grid;
-            /* Mantenemos el tamaño y forma uniforme que tenías antes, evitando que se expandan demasiado */
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 6rem;
         }
 
-        /* --- CARD SYSTEM CON CATEGORÍAS --- */
+        .grid-section-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-2);
+            margin-bottom: 3rem;
+            display: block;
+            border-bottom: 2px solid var(--gray-3);
+            padding-bottom: 1rem;
+            width: 100%;
+        }
+
+        /* --- CARD SYSTEM (RESTAURADO A ESTILO ORIGINAL) --- */
         .card {
             border: 2px solid var(--ink);
-            padding: 2.5rem; /* Ligeramente ajustado para tarjetas más compactas */
+            padding: 2.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 400px;
+            min-height: 420px;
             transition: all 0.4s var(--ease-out-expo);
             position: relative;
-            background: var(--bg);
+            background: var(--card-bg); /* Usamos variable nueva */
             cursor: pointer;
             overflow: hidden;
             /* Fallback color */
             --category-color: var(--default-cat);
         }
 
-        /* MEJORA: Indicador de categoría (barra superior) */
+        /* Indicador de categoría (barra superior) */
         .card::before {
             content: '';
             position: absolute;
@@ -135,7 +202,7 @@
             transform: scaleX(1);
         }
 
-        /* MEJORA: Shadow brutal pero con color de categoría */
+        /* Shadow brutal pero con color de categoría */
         .card:hover {
             transform: translate(-6px, -6px);
             box-shadow: 10px 10px 0px var(--category-color);
@@ -145,7 +212,6 @@
         .card[data-category="realtime"] { --category-color: var(--realtime); }
         .card[data-category="platform"] { --category-color: var(--platform); }
         .card[data-category="leadership"] { --category-color: var(--leadership); }
-        /* Categorías adicionales comunes */
         .card[data-category="infra"] { --category-color: var(--realtime); }
         .card[data-category="mlops"] { --category-color: var(--platform); }
         .card[data-category="culture"] { --category-color: var(--leadership); }
@@ -166,16 +232,16 @@
             font-weight: 600;
         }
 
-        /* MEJORA: Métricas con contexto integrado */
+        /* Métricas Grandes */
         .card-metric-wrapper {
             display: flex;
             align-items: baseline;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .card-metric {
-            font-size: clamp(3rem, 15vw, 4.5rem); /* Ajustado para que quepa en tarjetas más pequeñas */
+            font-size: clamp(3rem, 12vw, 4rem);
             font-weight: 900;
             line-height: 1;
             letter-spacing: -0.02em;
@@ -192,7 +258,7 @@
         }
 
         .card-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
@@ -205,7 +271,7 @@
             margin-bottom: 2rem;
         }
 
-        /* MEJORA: Metadata que aparece en hover */
+        /* Metadata con animación */
         .card-metadata {
             font-family: var(--font-mono);
             font-size: 0.8rem;
@@ -229,6 +295,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Link style */
         .card-link {
             margin-top: auto;
             font-family: var(--font-mono);
@@ -249,35 +316,6 @@
 
         .card:hover .card-link::after {
             transform: translateX(4px);
-        }
-
-        /* --- STATS BAR (Nuevo componente) --- */
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 2rem 0;
-            margin: 4rem 0;
-            border-top: 1px solid var(--gray-3);
-            border-bottom: 1px solid var(--gray-3);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-1);
         }
 
         /* --- FOOTER --- */
@@ -318,82 +356,55 @@
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 1024px) {
-            .stats-bar {
-                flex-direction: column;
-                gap: 2rem;
-            }
-        }
-
         @media (max-width: 768px) {
             .container { padding: 2rem 1.5rem; }
             header { margin-bottom: 4rem; }
             .card { padding: 2rem; min-height: 320px; }
-            /* .card-metric { font-size: 3.5rem; } */
             footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
-            
-            h1 { font-size: 2.5rem; }
             .projects-grid { grid-template-columns: 1fr; }
+            .friendly-title { font-size: 2rem; }
+            
+            /* Posicionar el toggle diferente en móvil si es necesario */
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
         }
-
-        /* --- ANIMACIONES DE ENTRADA --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        header { animation: fadeInUp 0.8s var(--ease-out-expo); }
-        .card { animation: fadeInUp 0.8s var(--ease-out-expo) backwards; }
-        /* Stagger animation para los primeros items */
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
 
     <div class="container">
         
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+            <span id="theme-text">Dark</span>
+        </button>
+
         <header>
-            <span class="name-badge">{{ .Site.Params.author | default "Oscar Armas" }} · {{ .Site.Params.role_title | default "Staff ML Engineer" }}</span>
-            <h1>{{ .Site.Params.hero_title | default "Building High-Scale<br>ML Infrastructure<br>That Ships." | safeHTML }}</h1>
-            <p class="subtitle">
-                {{ .Site.Params.hero_description | default "Specialized in MLOps platforms, real-time inference systems, and technical leadership. Focused on the unglamorous work that makes AI production-ready." }}
-            </p>
-</header>
+            <h1 class="friendly-title">{{ .Site.Params.greeting | default "Hola, soy" }} {{ .Site.Params.author | default "Oscar Armas" }}.</h1>
+            <div class="friendly-bio">
+                {{ if .Site.Params.bio_intro }}
+                <p>{{ .Site.Params.bio_intro | markdownify }}</p>
+                {{ else }}
+                <p>Soy Ingeniero ML basado en México. Me especializo en construir la infraestructura invisible que hace que la inteligencia artificial funcione fuera de los notebooks.</p>
+                {{ end }}
 
-        <!-- STATS BAR -->
-        <div class="stats-bar">
-{{ if .Site.Params.stats }}
-    {{ range .Site.Params.stats }}
-    <div class="stat-item">
-        <span class="stat-number">{{ .number }}</span>
-        <span class="stat-label">{{ .label }}</span>
-    </div>
-    {{ end }}
-            {{ else }}
-                <!-- Fallback/Demo stats si no están configuradas -->
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Years Production ML</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">200+</span>
-                    <span class="stat-label">RPS Sustained</span>
-</div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">0→1 Platforms</span>
-    </div>
-                <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Models Deployed</span>
+                {{ if .Site.Params.bio_current }}
+                <p>{{ .Site.Params.bio_current | markdownify }}</p>
+                {{ else }}
+                <p>Actualmente estoy obsesionado con MLOps y sistemas de baja latencia. Me gusta escribir sobre lo que aprendo mientras construyo cosas.</p>
+                {{ end }}
+
+                {{ if .Site.Params.bio_footer }}
+                <p>{{ .Site.Params.bio_footer | markdownify }}</p>
+                {{ else }}
+                <p>Abajo guardo notas sobre los problemas más interesantes con los que me he topado en empresas como LexisNexis y Rappi.</p>
+                {{ end }}
             </div>
-            {{ end }}
-        </div>
+        </header>
 
-        <!-- GRID DE PROYECTOS -->
+        <span class="grid-section-title">{{ .Site.Params.projects_title | default "Proyectos Seleccionados" }}</span>
+
         <main class="projects-grid">
             
             {{ $pages := where .Site.RegularPages "Type" "posts" }}
@@ -408,7 +419,7 @@
                             {{ .Params.context }}
                         {{ else }}
                              {{ .Date.Format "2006" }} · {{ .Params.category | default "Blog" }}
-                {{ end }}
+                        {{ end }}
                     </span>
                     
                     {{ if .Params.metric }}
@@ -416,10 +427,10 @@
                         <span class="card-metric">{{ .Params.metric }}</span>
                         {{ if .Params.metric_unit }}
                         <span class="card-metric-unit">{{ .Params.metric_unit }}</span>
-                {{ end }}
-            </div>
-            {{ end }}
-        </div>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
         
                 <div>
                     <h2 class="card-title">{{ .Title }}</h2>
@@ -428,7 +439,7 @@
                             {{ .Description }}
                         {{ else }}
                             {{ .Summary | truncate 120 }}
-    {{ end }}
+                        {{ end }}
                     </p>
                     
                     <div class="card-metadata">
@@ -440,37 +451,65 @@
                         {{ end }}
                         <span class="card-metadata-item">{{ .Date.Format "Jan 2006" }}</span>
                     </div>
-</div>
+                </div>
                 
                 <span class="card-link">
                     {{ if .Params.link_text }}
                         {{ .Params.link_text }}
                     {{ else }}
                         Read more
-{{ end }}
+                    {{ end }}
                 </span>
             </a>
-{{ end }}
+            {{ end }}
 
         </main>
 
         <footer>
             <div class="footer-links">
-{{ if .Site.Params.social }}
-        {{ range .Site.Params.social }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
-        {{ end }}
+                {{ if .Site.Params.social }}
+                    {{ range .Site.Params.social }}
+                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                    {{ end }}
                 {{ else }}
                     <a href="https://github.com/oscarmas" target="_blank">GitHub</a>
                     <a href="https://linkedin.com/in/oscararmas" target="_blank">LinkedIn</a>
-                    <a href="mailto:434.exe@gmail.com">Email</a>
-        {{ end }}
+                {{ end }}
+                
+                {{ if .Site.Params.email }}
+                    <a href="mailto:{{ .Site.Params.email }}">Email</a>
+                {{ end }}
+
                 <a href="/cv.pdf" target="_blank">Download CV</a>
-    </div>
-    <span>© {{ now.Year }}</span>
-</footer>
+            </div>
+            <span>© {{ now.Year }}</span>
+        </footer>
 
     </div>
+
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const themeText = document.getElementById('theme-text');
+        const htmlElement = document.documentElement;
+
+        // Función para actualizar el texto del botón
+        function updateButtonText() {
+            const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+            themeText.textContent = isDark ? 'Light' : 'Dark';
+        }
+
+        // Inicializar texto
+        updateButtonText();
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateButtonText();
+        });
+    </script>
 
 </body>
 </html>
