@@ -24,8 +24,8 @@ title = 'Oscar Armas'
   # Bio Sections (Edit here to update homepage text)
   # You can now use Markdown syntax like [text](url) for links!
   bio_intro = "I'm a Staff ML Engineer based in Mexico. I specialize in building infrastructure and services for scaling Startups or Huge Enterprises."
-  bio_current = "Currently, I specialize in MLOps, NLP, and RAG Infrastructure."
-  bio_footer = "I have worked in high-performance teams, and I love sharing knowledge, whether professional or from my projects like [@FakeGuru](https://fakeguru.ai) and [@YunoAI](https://yunoai.com)."
+  bio_current = "Currently working at [LexisNexis](https://www.lexisnexis.com/en-us/products/protege.page), focus on MLOps, and RAG Infrastructure."
+  bio_footer = "I have worked in high-performance teams on very know companies, and I love sharing knowledge, whether professional or from my projects like [@FakeGuru](https://fakeguru.ai) and [@YunoAI](https://yunoai.com)."
   
   # Section Titles
   projects_title = "Selected Projects"
