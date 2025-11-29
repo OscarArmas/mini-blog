@@ -6,6 +6,7 @@
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <link rel="icon" type="image/svg+xml" href="/images/page/favicon.svg">
     
     <script>
         // Prevenir FOUC (Flash of Unstyled Content)
@@ -29,6 +30,7 @@
             --gray-1: #666666;
             --gray-2: #999999;
             --gray-3: #E0E0E0;
+            --link-color: #2A9D8F; /* Color para links en bio */
             
             --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
             --font-mono: "SF Mono", "Monaco", "Consolas", monospace;
@@ -44,6 +46,7 @@
             --gray-1: #A0A0A0;
             --gray-2: #777777;
             --gray-3: #333333;
+            --link-color: #4DB6AC;
         }
 
         /* --- RESET & BASE --- */
