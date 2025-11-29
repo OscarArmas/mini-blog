@@ -193,6 +193,67 @@
             margin: 2rem 0;
         }
 
+        /* --- NAVIGATION LINKS (Nuevo Diseño) --- */
+        .post-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--gray-3);
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-3);
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-out-expo);
+            background: var(--card-bg);
+            height: 100%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--ink);
+            box-shadow: 4px 4px 0px var(--gray-2);
+        }
+
+        .nav-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--gray-1);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+        
+        .nav-next {
+            text-align: right;
+            margin-left: auto; /* Empujar a la derecha si falta el previo */
+            width: 100%;
+        }
+        
+        /* Si solo hay un elemento (next o prev), mantener grid */
+        .nav-placeholder {
+            visibility: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .post-navigation {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .nav-next { text-align: left; }
+        }
+
         /* --- FOOTER --- */
         .site-footer {
             margin-top: 6rem;
@@ -211,22 +272,22 @@
 
     <div class="container">
         
-        <header class="site-header">
+    <header class="site-header">
             <a href="/" class="nav-home-link">← {{ .Site.Title }}</a>
             
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
                 <span id="theme-text">Dark</span>
             </button>
-        </header>
+    </header>
 
         <main>
-            {{ block "main" . }}{{ end }}
-        </main>
+        {{ block "main" . }}{{ end }}
+    </main>
 
-        <footer class="site-footer">
+    <footer class="site-footer">
             <span>© {{ now.Year }} {{ .Site.Params.author }}</span>
             <a href="/">Home</a>
-        </footer>
+    </footer>
 
     </div>
 

@@ -9,7 +9,7 @@
         • {{ .Site.Params.author }}
         {{ end }}
         {{ if .ReadingTime }}
-        • {{ .ReadingTime }} min de lectura
+        • {{ .ReadingTime }} min read
         {{ end }}
     </div>
     {{ if .Params.tags }}
@@ -31,16 +31,19 @@
 <section>
     <nav class="post-navigation">
         {{ with .PrevInSection }}
-        <div class="nav-previous">
-            <span class="nav-label">← Previous</span>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </div>
+        <a href="{{ .RelPermalink }}" class="nav-link nav-previous">
+            <span class="nav-label">← Previous Post</span>
+            <span class="nav-title">{{ .Title }}</span>
+        </a>
+        {{ else }}
+        <div class="nav-placeholder"></div> <!-- Spacer para mantener layout si falta uno -->
         {{ end }}
+
         {{ with .NextInSection }}
-        <div class="nav-next">
-            <span class="nav-label">Next →</span>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </div>
+        <a href="{{ .RelPermalink }}" class="nav-link nav-next">
+            <span class="nav-label">Next Post →</span>
+            <span class="nav-title">{{ .Title }}</span>
+        </a>
         {{ end }}
     </nav>
 </section>
