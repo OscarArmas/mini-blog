@@ -1,6 +1,7 @@
 ---
 title: "Building the MLOps Platform"
 date: 2024-01-20
+weight: 1
 author: "Oscar Armas"
 description: "Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform."
 tags: ["platform", "mlops", "infrastructure"]
