@@ -1,28 +1,31 @@
 ---
-title: "Branching Strategys and Monorepos"
-date: 2024-01-25
+title: "The CI/CD Maturity Curve: From Startup Scripts to Enterprise Platforms"
+date: 2025-06-25
+weight: 2
 author: "Oscar Armas"
-description: ""
-tags: ["CI/CD", "", "Design Systems"]
+description: "A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering."
+tags: ["CI/CD", "Platform Engineering", "MLOps", "Architecture"]
 category: "leadership"
-context: "LexisNexis · Leadership"
-metric: "1st"
-metric_unit: "ML Engineer"
+context: "Platform · MLOps"
+metric: "Push"
+metric_unit: "ML Platforms"
 ---
 
-One of the most complex task when you create projects or infreaestrcuture from Zero is defining guidelines for CI/CD
+Defining strong CI/CD guidelines is an interesting task when building projects or infrastructure from zero.
+In this article, I share some recommendations based on my experience working with both startups and large enterprises.
 
-## 
+---
 
-Here I ill going to talk about some of my recommendatios when we work with startups or high entreprises.
+## From Single Repos to Monorepos: A Practical Journey
 
+When starting a new project, the first decision is usually how to structure the repository:
 
-Sigle repos: When we put all our code for ou project in ou repository
-Mono repos: Mutiple projects live in the same repository
+- **Single repo:** All code for one project stored in a single repository.  
+- **Monorepo:** Multiple projects living within one unified repository.
 
+In early-stage startups, one repo per project is usually the simplest and fastest approach. We keep the code, pipelines, and infrastructure together, and that’s often the right call.
 
-with startups whe usually use one repository for one project, and we put the deployment pipelines, infraestrcuture in the sabe repo, thats the recommendation.
-We could ahve something like this
+Here’s an example of a typical ML project structure that I like to use for simple projects:
 
 ```
 some-ai-project
@@ -31,10 +34,10 @@ some-ai-project
 │   └── deploy.groovy
 ├── infrastructure/          # IaC
 │   └── cloudformation.yaml
-├── src/                     # Código fuente
+├── src/                     # Source code
 │   ├── __init__.py
-│   ├── handler.py           # Lambda entry point
-│   ├── classifier.py        # Lógica principal
+│   ├── handler.py           # Entry point
+│   ├── classifier.py        # Main logic
 │   └── config/
 │       └── patterns.txt
 ├── tests/                   # Tests
@@ -48,28 +51,111 @@ some-ai-project
 ├── requirements-dev.txt
 └── pyproject.toml
 ```
+Some projects can work very well with this way of deployment for a good time.
+Operations are trivial when maintaining a single service. In fact, probably we don't need CI/CD, CloudFormation, etc. Services are easy and not much traffic, we could do something like this:
 
-Lets say we are at startup an we deide to start with the right leg, now we can deploy our model on our infra. the startup start escaling and creciendo, now new enginners going to the team, and now we do KT session to show the code and estructure we manage, so we get something like this:
+![Manual deployment](manual-deployment.png)
+---
 
-![Descentrilized Infra for startups](startup_cicd.png)
-
-As we see there are some engineers deploying code an infrestructure directly from the repository..
-sound good for iterate fast..
-
-But now what happens when Bob an entry level engineer joing and need to deploy some very simple services for the same project he decided to use lambda for hosting those sevices, but now we he note that we are creating a new repos for just a lambda that will need commits deploy and maybe not much maintance after that, soo he decided to consult the staff engineer abot hit and the staff proposes hi a new wy for manaing this... Monorepo, he propos taking easy this and just creating N folder for number of project you have on your repo, with multiple services for your project, al now other entrey level enginners could start working on the other services
-
-Also we hire some clpud engineers and the start defining some standars an rules for deploying on the cloud, those are basically SRE startndars that all the temas who deplo to cloud neeed to fill.
+While technically imperfect, this approach optimizes for velocity the only metric that matters in early-stage startups
+I saw some projects that worked like that, but let's start complicating things:
 
 
-now we can have somethi like this:
+## Scaling Up: When Teams Grow
 
-![Monorepo for multiple services](monorepo_01.png)
+Imagine the startup begins to grow. New talent and more experienced engineers start joining, and KT sessions appear for helping junior engineers structuring their services. New teams and projects start being proposed by the business, so each engineer within the same team or different ones starts being responsible for their service. We end up with a decentralized structure like this:
 
-We are taliing this as a brief resume but each of those diagrams require a lof of effort, and  can manage tousands of projects with out problem if are being implemented, so lets go for the last level, when we are manaign lot of projects we ususally need to euse and define stndards for deploying differnt kind of models, for example we can have 5 teams deploying mdoels on sagmaker, but all of those can be using differnte ways some people can be manage better practices, than the others, so the idea is taht we can generae a define a platform and guidelines for deploying on that startegy, there ala very intersting ways of deploying infraestructure for diffdent kind of models, for example Ray and triton are some of the mos interesints way i have found fo deploying huge infernce services and distributed jobs...
+![Decentralized Infra for startups](startup_cicd.png)
 
-We can define a standar of guidelines , resources and tools for deploying those services
-So now we have more requirementes SRE requirements and the requirementes we need for each one of the platforms, for example witch artifacsts and structure we need, how manage S3 structure, rollout strategys, autoscale, monitoring etc... The idea is that we can replicate that platforma for every team or vertical, or using one forthe general company, but this is a relly interesting projects for work:
+This setup helps teams **move fast**, but it also comes with challenges:
 
-![Monorepo for multiple services](enterprise_cicd.png)
+- Everyone deploys from different repos.
+- Standards may vary between engineers.
+- Infrastructure decisions become inconsistent.
 
- really tehre are a los of things we can add to each platform, really really check the image at the end of the post I will post all teh requrements we nned to mnage for deploying lambdas in a ay that could be valid for customer front
+It works… until it doesn't.
+
+---
+
+## The Bob Scenario: Why Monorepos Start Making Sense
+
+Now imagine *Bob*, an entry-level engineer, needs to deploy a simple service.  
+Creating an entire repository just for that small function feels like overkill — and it is.
+
+He asks a staff engineer for guidance, and the proposal is simple:
+
+**“Let’s start moving toward a monorepo.”**
+
+The idea:
+
+- One repository  
+- Multiple project folders preferably from the same vertical
+- Each with its own services and pipelines  
+- Shared tooling and standards
+
+Yep, Monorepo sounds good, but it also has disadvantages. Some of those are that it could be difficult to define standards and guidelines at the start, and we have to find ways to ensure all developers will follow those guidelines. The staff engineer is in charge of defining those.
+
+"The monorepo isn't just about folders; it's about atomic changes across services and shared governance"
+
+With new cloud engineers joining, SRE standards also start to appear: naming conventions, IaC templates, deployment rules, etc. Suddenly the monorepo becomes a natural evolution.
+
+We end up with something like this:
+
+![Monorepo for multiple services](monorepo.png)
+
+Until now, previous definitions will be useful for any company with lots of projects and services, but let's go for the next level that is more focused on ML platforms...
+
+---
+
+
+## Enterprise Scale: Platform Thinking
+
+Now let's fast-forward.
+
+We’re no longer dealing with a few projects — we’re managing **dozens or even hundreds**. Different teams deploy different types of models: SageMaker, batch jobs, real-time inference, distributed training, etc.
+
+And each team deploys differently.  
+Some follow best practices. Others don't.
+
+This is where **platform engineering** becomes essential.
+
+We start defining:
+
+- ✅ Standard guidelines  
+- ✅ Reusable resources  
+- ✅ Vetted Infrastructure Templates (IaC)
+- ✅ Shared tools  
+- ✅ Operational requirements (SRE)
+
+Examples of what we standardize:
+
+- Artifact lifecycle management
+- S3 data layouts 
+- Rollout strategies  
+- Autoscaling policies
+- Monitoring + Observability  
+- Security policies  
+
+At this level, the monorepo becomes a **platform**, not just a repo.
+
+Here’s what that can look like:
+
+![Monorepo for enterprise level](enterprise_cicd.png)
+
+
+
+## Final Thoughts
+
+
+Each diagram above represents a massive amount of work.  
+A well-implemented monorepo can support **thousands of services** if the platform beneath is strong.
+
+The architecture you choose is a function of your constraints:
+
+1. **Start simple:** Single repo.  
+2. **Grow with structure:** Monorepo.  
+3. **Evolve into a platform:** Standards, tooling, and reusable patterns.
+
+What matters is not the shape of the repo it’s how effectively teams can ship, maintain, and scale software.
+
+The goal isn't to build the most complex system, but to build the system that allows your team to ship value with the least friction.
