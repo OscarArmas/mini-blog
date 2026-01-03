@@ -74,7 +74,6 @@ Because these services were **customer-facing**, we redesigned our Lambda deploy
 - reproducible  
 - aligned with SRE requirements  
 
-→ **“Lambda Deployment Best Practices”** (internal doc)
 
 ---
 
@@ -90,7 +89,6 @@ I iterated on a new framework focused on:
 
 Not leetcode tricks... **actual engineering**.
 
-→ **“How to Hire Senior Engineers”** (playbook)
 
 ---
 
