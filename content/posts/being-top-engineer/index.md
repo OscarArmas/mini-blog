@@ -6,7 +6,7 @@ weight: 2
 author: "Oscar Armas"
 description: "What I learned and discover from excellent engineers"
 tags: ["Agency", "Ownershipt", "Top Engineers"]
-category: "leadership"
+categories: ["leadership"]
 context: "Platform · MLOps"
 metric: "MVP?"
 metric_unit: "Engineer"

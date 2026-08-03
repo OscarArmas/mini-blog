@@ -1,0 +1,68 @@
+/* Reset y estilos base compartidos por todas las páginas */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+a:hover { color: var(--ink); }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+.container--home {
+    max-width: 1400px;
+    line-height: 1.5;
+}
+
+/* Theme toggle: posición por defecto en páginas internas (header) */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 0.4rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.2s var(--ease-out-expo);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px var(--gray-2);
+}
+
+/* En home el toggle va flotando arriba a la derecha */
+.container--home .theme-toggle {
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+.container--home .theme-toggle:hover {
+    box-shadow: 4px 4px 0px var(--gray-2);
+}
+
+@media (max-width: 768px) {
+    .container { padding: 2rem 1.5rem; }
+    .container--home .theme-toggle {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}

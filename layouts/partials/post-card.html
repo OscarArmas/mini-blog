@@ -1,0 +1,46 @@
+{{ $category := index .Params.categories 0 | default "default" | lower }}
+<a href="{{ .RelPermalink }}" class="card" data-category="{{ $category }}">
+    <div class="card-header">
+        <span class="card-context">
+            {{ if .Params.context }}
+                {{ .Params.context }}
+            {{ else }}
+                {{ .Date.Format "2006" }} · {{ index .Params.categories 0 | default "Blog" }}
+            {{ end }}
+        </span>
+
+        {{ if .Params.metric }}
+        <div class="card-metric-wrapper">
+            <span class="card-metric">{{ .Params.metric }}</span>
+            {{ if .Params.metric_unit }}
+            <span class="card-metric-unit">{{ .Params.metric_unit }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+
+    <div>
+        <h2 class="card-title">{{ .Title }}</h2>
+        <p class="card-desc">
+            {{ if .Description }}
+                {{ .Description }}
+            {{ else }}
+                {{ .Summary | truncate 120 }}
+            {{ end }}
+        </p>
+
+        <div class="card-metadata">
+            {{ if .Params.stack }}
+            <span class="card-metadata-item">Stack: {{ .Params.stack }}</span>
+            {{ end }}
+            {{ if .Params.team }}
+            <span class="card-metadata-item">Team: {{ .Params.team }}</span>
+            {{ end }}
+            <span class="card-metadata-item">{{ .Date.Format "Jan 2006" }}</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        {{ .Params.link_text | default "Read more" }}
+    </span>
+</a>

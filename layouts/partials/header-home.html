@@ -1,0 +1,22 @@
+<header class="home-header">
+    <h1 class="friendly-title">{{ .Site.Params.greeting | default "Hola, soy" }} {{ .Site.Params.author | default "Oscar Armas" }}.</h1>
+    <div class="friendly-bio">
+        {{ if .Site.Params.bio_intro }}
+        <p>{{ .Site.Params.bio_intro | markdownify }}</p>
+        {{ else }}
+        <p>Soy Ingeniero ML basado en México. Me especializo en construir la infraestructura invisible que hace que la inteligencia artificial funcione fuera de los notebooks.</p>
+        {{ end }}
+
+        {{ if .Site.Params.bio_current }}
+        <p>{{ .Site.Params.bio_current | markdownify }}</p>
+        {{ else }}
+        <p>Actualmente estoy obsesionado con MLOps y sistemas de baja latencia. Me gusta escribir sobre lo que aprendo mientras construyo cosas.</p>
+        {{ end }}
+
+        {{ if .Site.Params.bio_footer }}
+        <p>{{ .Site.Params.bio_footer | markdownify }}</p>
+        {{ else }}
+        <p>Abajo guardo notas sobre los problemas más interesantes con los que me he topado en empresas como LexisNexis y Rappi.</p>
+        {{ end }}
+    </div>
+</header>

@@ -5,7 +5,7 @@ weight: 2
 author: "Oscar Armas"
 description: "A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering."
 tags: ["CI/CD", "Platform Engineering", "MLOps", "Architecture"]
-category: "leadership"
+categories: ["leadership"]
 context: "Platform · MLOps"
 metric: "Push"
 metric_unit: "ML Platforms"

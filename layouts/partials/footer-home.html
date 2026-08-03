@@ -1,0 +1,19 @@
+<footer class="home-footer">
+    <div class="footer-links">
+        {{ if .Site.Params.social }}
+            {{ range .Site.Params.social }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+            {{ end }}
+        {{ else }}
+            <a href="https://github.com/oscarmas" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/oscararmas" target="_blank">LinkedIn</a>
+        {{ end }}
+
+        {{ if .Site.Params.email }}
+            <a href="mailto:{{ .Site.Params.email }}">Email</a>
+        {{ end }}
+
+        <a href="/cv.pdf" target="_blank">Download CV</a>
+    </div>
+    <span>© {{ now.Year }}</span>
+</footer>

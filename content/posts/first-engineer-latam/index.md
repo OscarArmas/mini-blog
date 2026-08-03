@@ -4,7 +4,7 @@ date: 2024-01-25
 author: "Oscar Armas"
 description: "Establishing engineering best practices, building internal tools, and contributing to staff-level technical decisions."
 tags: ["leadership", "Staffing", "Design Systems"]
-category: "leadership"
+categories: ["leadership"]
 context: "LexisNexis · Leadership"
 metric: "1st"
 metric_unit: "ML Engineer"

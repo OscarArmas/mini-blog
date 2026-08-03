@@ -5,7 +5,7 @@ weight: 1
 author: "Oscar Armas"
 description: "Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform."
 tags: ["platform", "mlops", "infrastructure"]
-category: "platform"
+categories: ["platform"]
 context: "Platform · MLOps"
 metric: "0→1"
 metric_unit: "Zero to One"

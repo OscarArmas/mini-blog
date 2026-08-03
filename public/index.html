@@ -3,662 +3,658 @@
 <head>
 	<meta name="generator" content="Hugo 0.152.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Armas | Staff ML Engineer</title>
-    <link rel="icon" type="image/svg+xml" href="/images/page/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal blog Specialized in ML, RAG and AI workflows.">
 
-    <script>
-        
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
+<title>Oscar Armas | Staff ML Engineer</title>
+<link rel="icon" type="image/svg+xml" href="/images/page/favicon.svg">
+
+<script>
+    
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    })();
+</script>
+
 
     <style>
-         
-        :root {
-             
-            --bg: #FAFAFA;
-            --ink: #0A0A0A;
-            --card-bg: #FFFFFF;
-            --gray-1: #666666;
-            --gray-2: #999999;
-            --gray-3: #E0E0E0;
-            --link-color: #2A9D8F;  
-            
-             
-            --realtime: #E63946;       
-            --platform: #457B9D;       
-            --leadership: #2A9D8F;     
-            --default-cat: #333333;    
-            
-            --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-            --font-mono: "SF Mono", "Monaco", "Consolas", monospace;
-            
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-        }
-
-         
-        [data-theme="dark"] {
-            --bg: #0F0F0F;
-            --ink: #F0F0F0;
-            --card-bg: #1A1A1A;
-            --gray-1: #A0A0A0;
-            --gray-2: #777777;
-            --gray-3: #333333;
-            --link-color: #4DB6AC;
-
-             
-            --realtime: #FF6B6B;
-            --platform: #64B5F6;
-            --leadership: #4DB6AC;
-            --default-cat: #CCCCCC;
-        }
-
-         
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
-            background-color: var(--bg);
-            color: var(--ink);
-            font-family: var(--font-display);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;  
-        }
+        /* Variables compartidas: tema claro/oscuro y colores de categoría */
+:root {
+    --bg: #FAFAFA;
+    --ink: #0A0A0A;
+    --card-bg: #FFFFFF;
+    --gray-1: #666666;
+    --gray-2: #999999;
+    --gray-3: #E0E0E0;
+    --link-color: #2A9D8F;
 
-        a { text-decoration: none; color: inherit; }
+    --realtime: #E63946;
+    --platform: #457B9D;
+    --leadership: #2A9D8F;
+    --default-cat: #333333;
 
-         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            position: relative;  
-        }
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    --font-mono: "SF Mono", "Monaco", "Consolas", monospace;
 
-         
-        .theme-toggle {
-            position: absolute;
-            top: 3rem;
-            right: 2rem;
-            background: none;
-            border: 2px solid var(--ink);  
-            color: var(--ink);
-            padding: 0.5rem 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.2s var(--ease-out-expo);
-        }
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
 
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 4px 4px 0px var(--gray-2);
-        }
+[data-theme="dark"] {
+    --bg: #0F0F0F;
+    --ink: #F0F0F0;
+    --card-bg: #1A1A1A;
+    --gray-1: #A0A0A0;
+    --gray-2: #777777;
+    --gray-3: #333333;
+    --link-color: #4DB6AC;
 
-         
-        header {
-            margin-bottom: 6rem;
-            max-width: 800px;
-            padding-top: 2rem;
-        }
+    --realtime: #FF6B6B;
+    --platform: #64B5F6;
+    --leadership: #4DB6AC;
+    --default-cat: #CCCCCC;
+}
 
-        .friendly-title {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);  
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 2.5rem;
-            color: var(--ink);
-            line-height: 1.1;
-        }
+        /* Reset y estilos base compartidos por todas las páginas */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .friendly-bio {
-            font-size: 1.1rem;
-            color: var(--gray-1);
-            line-height: 1.8;
-        }
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+a:hover { color: var(--ink); }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+.container--home {
+    max-width: 1400px;
+    line-height: 1.5;
+}
+
+/* Theme toggle: posición por defecto en páginas internas (header) */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 0.4rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.2s var(--ease-out-expo);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px var(--gray-2);
+}
+
+/* En home el toggle va flotando arriba a la derecha */
+.container--home .theme-toggle {
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+.container--home .theme-toggle:hover {
+    box-shadow: 4px 4px 0px var(--gray-2);
+}
+
+@media (max-width: 768px) {
+    .container { padding: 2rem 1.5rem; }
+    .container--home .theme-toggle {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
         
-        .friendly-bio p {
-            margin-bottom: 1rem;  
-            max-width: 65ch;
-        }
+/* Estilos exclusivos de la página de inicio */
+.home-header {
+    margin-bottom: 6rem;
+    max-width: 800px;
+    padding-top: 2rem;
+}
 
-         
-        .friendly-bio a {
-            color: var(--link-color);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1px;
-            transition: all 0.2s;
-        }
-        
-        .friendly-bio a:hover {
-            background-color: rgba(42, 157, 143, 0.1);  
-            text-decoration-thickness: 2px;
-        }
+.friendly-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+    line-height: 1.1;
+}
 
-         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 6rem;
-        }
+.friendly-bio {
+    font-size: 1.1rem;
+    color: var(--gray-1);
+    line-height: 1.8;
+}
 
-        .grid-section-title {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gray-2);
-            margin-bottom: 3rem;
-            display: block;
-            border-bottom: 2px solid var(--gray-3);
-            padding-bottom: 1rem;
-            width: 100%;
-        }
+.friendly-bio p {
+    margin-bottom: 1rem;
+    max-width: 65ch;
+}
 
-         
-        .card {
-            border: 2px solid var(--ink);
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 420px;
-            transition: all 0.4s var(--ease-out-expo);
-            position: relative;
-            background: var(--card-bg);  
-            cursor: pointer;
-            overflow: hidden;
-             
-            --category-color: var(--default-cat);
-        }
+.friendly-bio a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: all 0.2s;
+}
 
-         
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: var(--category-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-out-expo);
-        }
+.friendly-bio a:hover {
+    background-color: rgba(42, 157, 143, 0.1);
+    text-decoration-thickness: 2px;
+}
 
-        .card:hover::before {
-            transform: scaleX(1);
-        }
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 6rem;
+}
 
-         
-        .card:hover {
-            transform: translate(-6px, -6px);
-            box-shadow: 10px 10px 0px var(--category-color);
-        }
+.grid-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gray-2);
+    margin-bottom: 3rem;
+    display: block;
+    border-bottom: 2px solid var(--gray-3);
+    padding-bottom: 1rem;
+    width: 100%;
+}
 
-         
-        .card[data-category="realtime"] { --category-color: var(--realtime); }
-        .card[data-category="platform"] { --category-color: var(--platform); }
-        .card[data-category="leadership"] { --category-color: var(--leadership); }
-        .card[data-category="infra"] { --category-color: var(--realtime); }
-        .card[data-category="mlops"] { --category-color: var(--platform); }
-        .card[data-category="culture"] { --category-color: var(--leadership); }
+.card {
+    border: 2px solid var(--ink);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 420px;
+    transition: all 0.4s var(--ease-out-expo);
+    position: relative;
+    background: var(--card-bg);
+    cursor: pointer;
+    overflow: hidden;
+    --category-color: var(--default-cat);
+}
 
-         
-        .card-header {
-            margin-bottom: 2rem;
-        }
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--category-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+}
 
-        .card-context {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--category-color);
-            margin-bottom: 1.5rem;
-            display: block;
-            font-weight: 600;
-        }
+.card:hover::before { transform: scaleX(1); }
 
-         
-        .card-metric-wrapper {
-            display: flex;
-            align-items: baseline;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+.card:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 10px 10px 0px var(--category-color);
+}
 
-        .card-metric {
-            font-size: clamp(3rem, 12vw, 4rem);
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            font-variant-numeric: tabular-nums;
-            color: var(--ink);
-        }
+.card[data-category="realtime"] { --category-color: var(--realtime); }
+.card[data-category="platform"] { --category-color: var(--platform); }
+.card[data-category="leadership"] { --category-color: var(--leadership); }
+.card[data-category="infra"] { --category-color: var(--realtime); }
+.card[data-category="mlops"] { --category-color: var(--platform); }
+.card[data-category="culture"] { --category-color: var(--leadership); }
 
-        .card-metric-unit {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--gray-1);
-            align-self: flex-end;
-            padding-bottom: 0.5rem;
-        }
+.card-header { margin-bottom: 2rem; }
 
-        .card-title {
-            font-size: clamp(1.5rem, 3vw, 1.8rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+.card-context {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--category-color);
+    margin-bottom: 1.5rem;
+    display: block;
+    font-weight: 600;
+}
 
-        .card-desc {
-            font-size: 1.05rem;
-            color: var(--gray-1);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
+.card-metric-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
 
-         
-        .card-metadata {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--gray-2);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s var(--ease-in-out);
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--gray-3);
-        }
+.card-metric {
+    font-size: clamp(3rem, 12vw, 4rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+}
 
-        .card:hover .card-metadata {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.card-metric-unit {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--gray-1);
+    align-self: flex-end;
+    padding-bottom: 0.5rem;
+}
 
-        .card-metadata-item {
-            display: inline-block;
-            margin-right: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
+.card-title {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
 
-         
-        .card-link {
-            margin-top: auto;
-            font-family: var(--font-mono);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            color: var(--category-color);
-            transition: gap 0.3s var(--ease-out-expo);
-            gap: 0.5rem;
-        }
+.card-desc {
+    font-size: 1.05rem;
+    color: var(--gray-1);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
 
-        .card-link::after {
-            content: "→";
-            font-size: 1.2rem;
-            transition: transform 0.3s var(--ease-out-expo);
-        }
+.card-metadata {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray-2);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s var(--ease-in-out);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-3);
+}
 
-        .card:hover .card-link::after {
-            transform: translateX(4px);
-        }
+.card:hover .card-metadata {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-         
-        footer {
-            margin-top: 8rem;
-            padding-top: 3rem;
-            border-top: 2px solid var(--ink);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
+.card-metadata-item {
+    display: inline-block;
+    margin-right: 1.5rem;
+    margin-bottom: 0.5rem;
+}
 
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
+.card-link {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    color: var(--category-color);
+    transition: gap 0.3s var(--ease-out-expo);
+    gap: 0.5rem;
+}
 
-        footer a {
-            position: relative;
-            transition: color 0.2s;
-        }
+.card-link::after {
+    content: "→";
+    font-size: 1.2rem;
+    transition: transform 0.3s var(--ease-out-expo);
+}
 
-        footer a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--ink);
-            transition: width 0.3s var(--ease-out-expo);
-        }
+.card:hover .card-link::after { transform: translateX(4px); }
 
-        footer a:hover::after {
-            width: 100%;
-        }
+.home-footer {
+    margin-top: 8rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
 
-         
-        @media (max-width: 768px) {
-            .container { padding: 2rem 1.5rem; }
-            header { margin-bottom: 4rem; }
-            .card { padding: 2rem; min-height: 320px; }
-            footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .friendly-title { font-size: 2rem; }
-            
-             
-            .theme-toggle {
-                top: 1.5rem;
-                right: 1.5rem;
-            }
-        }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+.home-footer a {
+    position: relative;
+    transition: color 0.2s;
+}
+
+.home-footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--ink);
+    transition: width 0.3s var(--ease-out-expo);
+}
+
+.home-footer a:hover::after { width: 100%; }
+
+@media (max-width: 768px) {
+    .home-header { margin-bottom: 4rem; }
+    .card { padding: 2rem; min-height: 320px; }
+    .home-footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .friendly-title { font-size: 2rem; }
+}
+
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-            <span id="theme-text">Dark</span>
-        </button>
+    <div class="container container--home">
 
-        <header>
-            <h1 class="friendly-title">Hi, I&#39;m Oscar Armas.</h1>
-            <div class="friendly-bio">
-                
-                <p>I&rsquo;m a Staff ML Engineer based in Mexico. I specialize in building infrastructure and services for scaling Startups or Huge Enterprises.</p>
-                
+        
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+    <span id="theme-text">Dark</span>
+</button>
 
-                
-                <p>Currently working at <a href="https://www.lexisnexis.com/en-us/products/protege.page">LexisNexis</a>, focus on MLOps, and RAG Infrastructure.</p>
-                
+            <header class="home-header">
+    <h1 class="friendly-title">Hi, I&#39;m Oscar Armas.</h1>
+    <div class="friendly-bio">
+        
+        <p>I&rsquo;m a Staff ML Engineer based in Mexico. I specialize in building infrastructure and services for scaling Startups or Huge Enterprises.</p>
+        
 
-                
-                <p>I have worked in high-performance teams on very know companies, and I love sharing knowledge, whether professional or from my projects like <a href="https://fakeguru.ai">@FakeGuru</a> &amp; <a href="https://minidrafts.com">@MiniDrafts</a></p>
-                
-            </div>
-        </header>
+        
+        <p>Currently working at <a href="https://www.lexisnexis.com/en-us/products/protege.page">LexisNexis</a>, focus on MLOps, and RAG Infrastructure.</p>
+        
 
-        <span class="grid-section-title">Selected Projects</span>
+        
+        <p>I have worked in high-performance teams on very know companies, and I love sharing knowledge, whether professional or from my projects like <a href="https://fakeguru.ai">@FakeGuru</a> &amp; <a href="https://minidrafts.com">@MiniDrafts</a></p>
+        
+    </div>
+</header>
 
-        <main class="projects-grid">
-            
-            
-            
-            
-            
-            
-            <a href="/posts/mlops-from-zero/" class="card" data-category="platform">
-                <div class="card-header">
-                    <span class="card-context">
-                        
-                            Platform · MLOps
-                        
-                    </span>
-                    
-                    
-                    <div class="card-metric-wrapper">
-                        <span class="card-metric">0→1</span>
-                        
-                        <span class="card-metric-unit">Zero to One</span>
-                        
-                    </div>
-                    
-                </div>
         
-                <div>
-                    <h2 class="card-title">Building the MLOps Platform</h2>
-                    <p class="card-desc">
-                        
-                            Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform.
-                        
-                    </p>
-                    
-                    <div class="card-metadata">
-                        
-                        
-                        <span class="card-metadata-item">Jan 2024</span>
-                    </div>
-                </div>
-                
-                <span class="card-link">
-                    
-                        Read more
-                    
-                </span>
-            </a>
+
+        <main>
             
+<span class="grid-section-title">Selected Projects</span>
+
+<div class="projects-grid">
+
+
+
+
+    
+<a href="/posts/mlops-from-zero/" class="card" data-category="platform">
+    <div class="card-header">
+        <span class="card-context">
             
-            <a href="/posts/being-top-engineer/" class="card" data-category="leadership">
-                <div class="card-header">
-                    <span class="card-context">
-                        
-                            Platform · MLOps
-                        
-                    </span>
-                    
-                    
-                    <div class="card-metric-wrapper">
-                        <span class="card-metric">MVP?</span>
-                        
-                        <span class="card-metric-unit">Engineer</span>
-                        
-                    </div>
-                    
-                </div>
+                Platform · MLOps
+            
+        </span>
+
         
-                <div>
-                    <h2 class="card-title">High-Leverage Engineers</h2>
-                    <p class="card-desc">
-                        
-                            What I learned and discover from excellent engineers
-                        
-                    </p>
-                    
-                    <div class="card-metadata">
-                        
-                        
-                        <span class="card-metadata-item">Jun 2025</span>
-                    </div>
-                </div>
-                
-                <span class="card-link">
-                    
-                        Read more
-                    
-                </span>
-            </a>
+        <div class="card-metric-wrapper">
+            <span class="card-metric">0→1</span>
             
+            <span class="card-metric-unit">Zero to One</span>
             
-            <a href="/posts/branch-strategys/" class="card" data-category="leadership">
-                <div class="card-header">
-                    <span class="card-context">
-                        
-                            Platform · MLOps
-                        
-                    </span>
-                    
-                    
-                    <div class="card-metric-wrapper">
-                        <span class="card-metric">Push</span>
-                        
-                        <span class="card-metric-unit">ML Platforms</span>
-                        
-                    </div>
-                    
-                </div>
+        </div>
         
-                <div>
-                    <h2 class="card-title">The CI/CD Maturity Curve: From Startup Scripts to Enterprise Platforms</h2>
-                    <p class="card-desc">
-                        
-                            A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering.
-                        
-                    </p>
-                    
-                    <div class="card-metadata">
-                        
-                        
-                        <span class="card-metadata-item">Jun 2025</span>
-                    </div>
-                </div>
-                
-                <span class="card-link">
-                    
-                        Read more
-                    
-                </span>
-            </a>
+    </div>
+
+    <div>
+        <h2 class="card-title">Building the MLOps Platform</h2>
+        <p class="card-desc">
+            
+                Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform.
+            
+        </p>
+
+        <div class="card-metadata">
             
             
-            <a href="/posts/first-engineer-latam/" class="card" data-category="leadership">
-                <div class="card-header">
-                    <span class="card-context">
-                        
-                            LexisNexis · Leadership
-                        
-                    </span>
-                    
-                    
-                    <div class="card-metric-wrapper">
-                        <span class="card-metric">1st</span>
-                        
-                        <span class="card-metric-unit">ML Engineer</span>
-                        
-                    </div>
-                    
-                </div>
+            <span class="card-metadata-item">Jan 2024</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        Read more
+    </span>
+</a>
+
+
+    
+<a href="/posts/being-top-engineer/" class="card" data-category="leadership">
+    <div class="card-header">
+        <span class="card-context">
+            
+                Platform · MLOps
+            
+        </span>
+
         
-                <div>
-                    <h2 class="card-title">Engineering Culture &amp; Leadership</h2>
-                    <p class="card-desc">
-                        
-                            Establishing engineering best practices, building internal tools, and contributing to staff-level technical decisions.
-                        
-                    </p>
-                    
-                    <div class="card-metadata">
-                        
-                        
-                        <span class="card-metadata-item">Jan 2024</span>
-                    </div>
-                </div>
-                
-                <span class="card-link">
-                    
-                        Read more
-                    
-                </span>
-            </a>
+        <div class="card-metric-wrapper">
+            <span class="card-metric">MVP?</span>
             
+            <span class="card-metric-unit">Engineer</span>
             
-            <a href="/posts/low-latency-services/" class="card" data-category="realtime">
-                <div class="card-header">
-                    <span class="card-context">
-                        
-                            Rappi · Real-Time
-                        
-                    </span>
-                    
-                    
-                    <div class="card-metric-wrapper">
-                        <span class="card-metric">&lt;100ms</span>
-                        
-                        <span class="card-metric-unit">Latency p99</span>
-                        
-                    </div>
-                    
-                </div>
+        </div>
         
-                <div>
-                    <h2 class="card-title">Low-Latency Inference at Scale</h2>
-                    <p class="card-desc">
-                        
-                            How we architected a high-throughput prediction service handling 200&#43; RPS with &lt;100ms latency using Go and Python.
-                        
-                    </p>
-                    
-                    <div class="card-metadata">
-                        
-                        
-                        <span class="card-metadata-item">Jan 2024</span>
-                    </div>
-                </div>
-                
-                <span class="card-link">
-                    
-                        Read more
-                    
-                </span>
-            </a>
+    </div>
+
+    <div>
+        <h2 class="card-title">High-Leverage Engineers</h2>
+        <p class="card-desc">
             
+                What I learned and discover from excellent engineers
+            
+        </p>
+
+        <div class="card-metadata">
+            
+            
+            <span class="card-metadata-item">Jun 2025</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        Read more
+    </span>
+</a>
+
+
+    
+<a href="/posts/branch-strategys/" class="card" data-category="leadership">
+    <div class="card-header">
+        <span class="card-context">
+            
+                Platform · MLOps
+            
+        </span>
+
+        
+        <div class="card-metric-wrapper">
+            <span class="card-metric">Push</span>
+            
+            <span class="card-metric-unit">ML Platforms</span>
+            
+        </div>
+        
+    </div>
+
+    <div>
+        <h2 class="card-title">The CI/CD Maturity Curve: From Startup Scripts to Enterprise Platforms</h2>
+        <p class="card-desc">
+            
+                A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering.
+            
+        </p>
+
+        <div class="card-metadata">
+            
+            
+            <span class="card-metadata-item">Jun 2025</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        Read more
+    </span>
+</a>
+
+
+    
+<a href="/posts/first-engineer-latam/" class="card" data-category="leadership">
+    <div class="card-header">
+        <span class="card-context">
+            
+                LexisNexis · Leadership
+            
+        </span>
+
+        
+        <div class="card-metric-wrapper">
+            <span class="card-metric">1st</span>
+            
+            <span class="card-metric-unit">ML Engineer</span>
+            
+        </div>
+        
+    </div>
+
+    <div>
+        <h2 class="card-title">Engineering Culture &amp; Leadership</h2>
+        <p class="card-desc">
+            
+                Establishing engineering best practices, building internal tools, and contributing to staff-level technical decisions.
+            
+        </p>
+
+        <div class="card-metadata">
+            
+            
+            <span class="card-metadata-item">Jan 2024</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        Read more
+    </span>
+</a>
+
+
+    
+<a href="/posts/low-latency-services/" class="card" data-category="realtime">
+    <div class="card-header">
+        <span class="card-context">
+            
+                Rappi · Real-Time
+            
+        </span>
+
+        
+        <div class="card-metric-wrapper">
+            <span class="card-metric">&lt;100ms</span>
+            
+            <span class="card-metric-unit">Latency p99</span>
+            
+        </div>
+        
+    </div>
+
+    <div>
+        <h2 class="card-title">Low-Latency Inference at Scale</h2>
+        <p class="card-desc">
+            
+                How we architected a high-throughput prediction service handling 200&#43; RPS with &lt;100ms latency using Go and Python.
+            
+        </p>
+
+        <div class="card-metadata">
+            
+            
+            <span class="card-metadata-item">Jan 2024</span>
+        </div>
+    </div>
+
+    <span class="card-link">
+        Read more
+    </span>
+</a>
+
+
+</div>
 
         </main>
 
-        <footer>
-            <div class="footer-links">
-                
-                    
-                    <a href="https://github.com/OscarArmas" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    
-                    <a href="https://www.linkedin.com/in/oscar-armas/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    
-                
-                
-                
-                    <a href="mailto:434.exe@gmail.com">Email</a>
-                
+        
+            <footer class="home-footer">
+    <div class="footer-links">
+        
+            
+            <a href="https://github.com/OscarArmas" target="_blank" rel="noopener noreferrer">GitHub</a>
+            
+            <a href="https://www.linkedin.com/in/oscar-armas/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            
+        
 
-                <a href="/cv.pdf" target="_blank">Download CV</a>
-            </div>
-            <span>© 2026</span>
-        </footer>
+        
+            <a href="mailto:434.exe@gmail.com">Email</a>
+        
+
+        <a href="/cv.pdf" target="_blank">Download CV</a>
+    </div>
+    <span>© 2026</span>
+</footer>
+
+        
 
     </div>
 
     <script>
-        const toggleButton = document.getElementById('theme-toggle');
-        const themeText = document.getElementById('theme-text');
-        const htmlElement = document.documentElement;
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeText = document.getElementById('theme-text');
+    const htmlElement = document.documentElement;
 
-        
-        function updateButtonText() {
-            const isDark = htmlElement.getAttribute('data-theme') === 'dark';
-            themeText.textContent = isDark ? 'Light' : 'Dark';
-        }
+    function updateButtonText() {
+        const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+        themeText.textContent = isDark ? 'Light' : 'Dark';
+    }
 
-        
+    updateButtonText();
+
+    toggleButton.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
         updateButtonText();
-
-        toggleButton.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateButtonText();
-        });
-    </script>
+    });
+</script>
 
 </body>
 </html>

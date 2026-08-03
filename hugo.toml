@@ -4,6 +4,11 @@ languageCode = 'en'
 title = 'Oscar Armas'
 # theme = 'ananke'  # Theme disabled - using custom template
 
+# Taxonomías nativas de Hugo (generan páginas en /categories/ y /tags/)
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 # Menu Configuration (optional)
 [[menu.main]]
   name = "Home"

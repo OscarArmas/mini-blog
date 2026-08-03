@@ -1,0 +1,21 @@
+<script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeText = document.getElementById('theme-text');
+    const htmlElement = document.documentElement;
+
+    function updateButtonText() {
+        const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+        themeText.textContent = isDark ? 'Light' : 'Dark';
+    }
+
+    updateButtonText();
+
+    toggleButton.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateButtonText();
+    });
+</script>
