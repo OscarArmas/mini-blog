@@ -6,7 +6,7 @@
     <description>Recent content on Oscar Armas</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building the MLOps Platform</title>
@@ -14,6 +14,20 @@
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/mlops-from-zero/</guid>
       <description>&lt;p&gt;Building a platform from scratch is ultimately about &lt;strong&gt;standardization&lt;/strong&gt; and &lt;strong&gt;developer experience&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;How do small companies go from scrappy startup to unicorn-level operations?&lt;/p&gt;&#xA;&lt;p&gt;We all know the pattern: early-stage teams, especially in ML and DS, prioritize &lt;em&gt;speed&lt;/em&gt; over &lt;em&gt;robustness&lt;/em&gt;.&lt;br&gt;&#xA;Ship features → hit deadlines → experiment fast. Best practices come later.&lt;/p&gt;&#xA;&lt;p&gt;But what happens when the company starts raising bigger rounds, scaling operations, hiring dozens of new engineers, and introducing more requirements?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>High-Leverage Engineers</title>
+      <link>http://localhost:1313/posts/being-top-engineer/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/being-top-engineer/</guid>
+      <description>&lt;p&gt;Here I will share some of the best advices and things I discovered while I worked at different companies, startups, some unicorns, and some corporates.&lt;/p&gt;&#xA;&lt;p&gt;First of all, I am not the kind of engineer who is a LeetCode expert, nor a high-IQ genius. When I was in programming classes, I really struggled with programming tasks, and that’s why I moved to DS. But in the end, I had to learn programming anyway.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The CI/CD Maturity Curve: From Startup Scripts to Enterprise Platforms</title>
+      <link>http://localhost:1313/posts/branch-strategys/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/branch-strategys/</guid>
+      <description>&lt;p&gt;Defining strong CI/CD guidelines is an interesting task when building projects or infrastructure from zero.&#xA;In this article, I share some recommendations based on my experience working with both startups and large enterprises.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;from-single-repos-to-monorepos-a-practical-journey&#34;&gt;From Single Repos to Monorepos: A Practical Journey&lt;/h2&gt;&#xA;&lt;p&gt;When starting a new project, the first decision is usually how to structure the repository:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Single repo:&lt;/strong&gt; All code for one project stored in a single repository.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Monorepo:&lt;/strong&gt; Multiple projects living within one unified repository.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;In early-stage startups, one repo per project is usually the simplest and fastest approach. We keep the code, pipelines, and infrastructure together, and that’s often the right call.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Engineering Culture &amp; Leadership</title>

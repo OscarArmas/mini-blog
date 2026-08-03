@@ -6,8 +6,57 @@
     <description>Recent content in Tags on Oscar Armas</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agency</title>
+      <link>http://localhost:1313/tags/agency/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/agency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>http://localhost:1313/tags/architecture/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CI/CD</title>
+      <link>http://localhost:1313/tags/ci/cd/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ci/cd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mlops</title>
+      <link>http://localhost:1313/tags/mlops/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/mlops/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ownershipt</title>
+      <link>http://localhost:1313/tags/ownershipt/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ownershipt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Platform Engineering</title>
+      <link>http://localhost:1313/tags/platform-engineering/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/platform-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Top Engineers</title>
+      <link>http://localhost:1313/tags/top-engineers/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/top-engineers/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Design Systems</title>
       <link>http://localhost:1313/tags/design-systems/</link>
@@ -34,13 +83,6 @@
       <link>http://localhost:1313/tags/infrastructure/</link>
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/infrastructure/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mlops</title>
-      <link>http://localhost:1313/tags/mlops/</link>
-      <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mlops/</guid>
       <description></description>
     </item>
     <item>
