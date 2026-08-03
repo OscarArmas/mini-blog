@@ -69,14 +69,14 @@ Know your business. Talk with your manager and stakeholders and understand prior
 This was more common in the past, when we didn’t have Cursor or LLMs to code like beasts. But I can assure you it’s still possible to create bad-practice code with AI if you ignore context engineering.
 
 • Talk with people.
-Programming may seem lonely, and sometimes it is, but real knowledge comes from talking with others. I usually talk with DevOps, DS, or product managers. I prefer emails or DMs and respect people’s time—I’m a big fan of “this could be an email”—but sometimes calls are necessary.
+Programming may seem lonely, and sometimes it is, but real knowledge comes from talking with others. I usually talk with DevOps, DS, or product managers. I prefer emails or DMs and respect people’s time I’m a big fan of “this could be an email” but sometimes calls are necessary.
 Some technical skills I haven’t seen in junior engineers:
 They don’t ask, or they ask the wrong person. Use Git blame, documentation, and commits to see who worked on features.
 They don’t use a debugger (this saves a lot of time).
-They use AI coding assistants very naively—just asking and approving changes.
+They use AI coding assistants very naively just asking and approving changes.
 No documentation.
 
 They don’t take responsibility; they just wait for new stories to be assigned.
-Those are some points if you’re hungry for knowledge and really want to be a top engineer. I didn’t expect to become a good engineer—I just wanted to learn new things, improve my methods, solve daily system issues, and express my love. In the end, I learned all of this without expecting it.
+Those are some points if you’re hungry for knowledge and really want to be a top engineer. I didn’t expect to become a good engineer. I just wanted to learn new things, improve my methods, solve daily system issues, and express my love. In the end, I learned all of this without expecting it.
 
 ---
