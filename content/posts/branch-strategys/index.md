@@ -2,7 +2,7 @@
 title: "The CI/CD Maturity Curve: From Startup Scripts to Enterprise Platforms"
 date: 2025-06-25
 weight: 2
-author: "Oscar Armas"
+author: "Oscar A"
 description: "A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering."
 tags: ["CI/CD", "Platform Engineering", "MLOps", "Architecture"]
 categories: ["leadership"]

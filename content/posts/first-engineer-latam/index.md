@@ -1,7 +1,7 @@
 ---
 title: "Engineering Culture & Leadership"
 date: 2024-01-25
-author: "Oscar Armas"
+author: "Oscar A"
 description: "Establishing engineering best practices, building internal tools, and contributing to staff-level technical decisions."
 tags: ["leadership", "Staffing", "Design Systems"]
 categories: ["leadership"]

@@ -1,7 +1,7 @@
 # Site Configuration
 baseURL = 'http://example.org/'
 languageCode = 'en'
-title = 'Oscar Armas'
+title = 'Oscar A'
 # theme = 'ananke'  # Theme disabled - using custom template
 
 # Taxonomías nativas de Hugo (generan páginas en /categories/ y /tags/)
@@ -23,11 +23,10 @@ title = 'Oscar Armas'
 # Params Configuration
 [params]
   # Author Information
-  author = "Oscar Armas"
+  author = "Oscar A"
   greeting = "Hi, I'm"
   
   # Bio Sections (Edit here to update homepage text)
-  # You can now use Markdown syntax like [text](url) for links!
   bio_intro = "I'm a Staff ML Engineer based in Mexico. I specialize in building infrastructure and services for scaling Startups or Huge Enterprises."
   bio_current = "Currently working at [LexisNexis](https://www.lexisnexis.com/en-us/products/protege.page), focus on MLOps, and RAG Infrastructure."
   bio_footer = "I have worked in high-performance teams on very know companies, and I love sharing knowledge, whether professional or from my projects like [@FakeGuru](https://fakeguru.ai) & [@MiniDrafts](https://minidrafts.com)"
@@ -40,9 +39,6 @@ title = 'Oscar Armas'
   
   # Site Description (SEO)
   description = "Personal blog Specialized in ML, RAG and AI workflows."
-  
-  # Email for footer
-  email = "434.exe@gmail.com"
   
   # Show recent posts on homepage
   show_recent_posts = true
@@ -61,14 +57,6 @@ title = 'Oscar Armas'
  [[params.stats]]
    number = "3"
    label = "0→1 PLATFORMS"
-  
-# Social Links
-[[params.social]]
-   name = "GitHub"
-   url = "https://github.com/OscarArmas"
-[[params.social]]
-   name = "LinkedIn"
-   url = "https://www.linkedin.com/in/oscar-armas/"
 
 [caches]
   [caches.images]

@@ -3,7 +3,7 @@
 title: "High-Leverage Engineers"
 date: 2025-06-25
 weight: 2
-author: "Oscar Armas"
+author: "Oscar A"
 description: "What I learned and discover from excellent engineers"
 tags: ["Agency", "Ownershipt", "Top Engineers"]
 categories: ["leadership"]

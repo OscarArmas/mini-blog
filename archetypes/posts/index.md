@@ -1,7 +1,7 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-author: "Oscar Armas"
+author: "Oscar A"
 description: ""
 tags: []
 categories: []
