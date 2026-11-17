@@ -6,12 +6,31 @@
     margin-bottom: 4rem;
     font-family: var(--font-mono);
     font-size: 0.9rem;
+    gap: 1rem;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
 }
 
 .nav-home-link {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.nav-menu-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-1);
+}
+
+.nav-menu-link:hover {
+    color: var(--ink);
 }
 
 h1 {
@@ -164,4 +183,89 @@ h1 {
     color: var(--gray-1);
     display: flex;
     justify-content: space-between;
+}
+
+.subtitle {
+    color: var(--gray-1);
+    margin-bottom: 2.5rem;
+    max-width: 65ch;
+}
+
+.post-item {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--gray-3);
+}
+
+.post-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.post-title a:hover {
+    color: var(--gray-1);
+}
+
+.post-excerpt {
+    color: var(--gray-1);
+    margin-bottom: 0.5rem;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 1rem;
+}
+
+header .post-tags {
+    margin-bottom: 2rem;
+}
+
+.tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--link-color);
+}
+
+.tag:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.post-card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.pagination-link {
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 0.4rem 0.8rem;
+}
+
+.pagination-link:hover {
+    transform: translateY(-2px);
+}
+
+.pagination-info {
+    color: var(--gray-1);
 }

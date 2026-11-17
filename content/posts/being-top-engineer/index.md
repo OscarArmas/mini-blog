@@ -5,9 +5,11 @@ date: 2025-06-25
 weight: 2
 author: "Oscar A"
 description: "What I learned and discover from excellent engineers"
-tags: ["Agency", "Ownershipt", "Top Engineers"]
+tags: ["Agency", "Ownership", "Top Engineers"]
 categories: ["leadership"]
 context: "Platform · MLOps"
+home_section: "essays"
+home_order: 2
 metric: "MVP?"
 metric_unit: "Engineer"
 
@@ -58,9 +60,7 @@ We sometimes think, “Yep, I’ll solve this later,” but taking action and cr
 Some of my best managers told me: it doesn’t count if you don’t do a tech talk. Yes!! When you create something good, prepare a call for your team or the engineering team and show what you accomplished. Document your project and be as explicit as possible. There is nothing better than well-written documentation.
 
 • Really create.
-Whatever you think, there are a lot of things to create. Really. I even created a page to declare my love to my girlfriend:
-https://vercel.com/os-projects-6c155535/ari-love
-This is just one of my side projects. Learn new things.
+Whatever you think, there are a lot of things to create. Really. I even created a page to declare my love to my girlfriend. This is just one of my side projects. Learn new things.
 
 • Prioritize impactful work and be transparent.
 Know your business. Talk with your manager and stakeholders and understand priorities. If you have an estimated time, say it. If the PO wants a feature in 3 days but you know it will take longer, say so and negotiate more time or alternatives.

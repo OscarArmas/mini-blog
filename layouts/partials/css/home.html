@@ -5,6 +5,24 @@
     padding-top: 2rem;
 }
 
+.home-nav {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.home-nav a {
+    color: var(--gray-1);
+}
+
+.home-nav a:hover {
+    color: var(--ink);
+}
+
 .friendly-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
@@ -38,11 +56,15 @@
     text-decoration-thickness: 2px;
 }
 
+.home-section + .home-section {
+    margin-top: 2rem;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
 }
 
 .grid-section-title {
