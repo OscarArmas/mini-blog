@@ -1,4 +1,13 @@
 <header class="site-header">
-    <a href="/" class="nav-home-link">← {{ .Site.Title }}</a>
+    <nav class="site-nav" aria-label="Main">
+        {{ range .Site.Menus.main }}
+        {{/* .URL ya incluye el prefijo de baseURL (por ejemplo /mini-blog/). No volver a pasar relURL. */}}
+        {{ if ne .URL $.RelPermalink }}
+        <a href="{{ .URL }}" class="{{ if eq .Name "Home" }}nav-home-link{{ else }}nav-menu-link{{ end }}">
+            {{ if eq .Name "Home" }}← {{ $.Site.Title }}{{ else }}{{ .Name }}{{ end }}
+        </a>
+        {{ end }}
+        {{ end }}
+    </nav>
     {{ partial "theme-toggle.html" . }}
 </header>

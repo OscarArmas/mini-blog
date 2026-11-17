@@ -6,6 +6,8 @@ description: "Establishing engineering best practices, building internal tools, 
 tags: ["leadership", "Staffing", "Design Systems"]
 categories: ["leadership"]
 context: "LexisNexis · Leadership"
+home_section: "architecture"
+home_order: 3
 metric: "1st"
 metric_unit: "ML Engineer"
 ---

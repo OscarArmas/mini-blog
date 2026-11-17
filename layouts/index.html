@@ -3,14 +3,25 @@
 {{ end }}
 
 {{ define "main" }}
-<span class="grid-section-title">{{ .Site.Params.projects_title | default "Proyectos Seleccionados" }}</span>
-
-<div class="projects-grid">
-{{ $pages := where .Site.RegularPages "Type" "posts" }}
-{{ $limit := .Site.Params.home_posts_limit | default 6 }}
-
-{{ range first $limit $pages }}
-    {{ partial "post-card.html" . }}
+{{ $posts := where .Site.RegularPages "Type" "posts" }}
+{{/*
+  La home no se ordena por fecha. Cada post declara home_section y home_order.
+  Arquitectura va primero para mostrar que sabes construir; los ensayos van después
+  para mostrar criterio. Los drafts no entran en RegularPages: low-latency queda
+  fuera mientras diga "Coming soon" y, con home_order 1, queda al frente de
+  arquitectura el día que se publique.
+*/}}
+{{ range .Site.Params.home_sections }}
+    {{ $group := where $posts "Params.home_section" .id }}
+    {{ if $group }}
+    <section class="home-section">
+        <span class="grid-section-title">{{ .title }}</span>
+        <div class="projects-grid">
+            {{ range sort $group "Params.home_order" "asc" }}
+                {{ partial "post-card.html" . }}
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
 {{ end }}
-</div>
 {{ end }}

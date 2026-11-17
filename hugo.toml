@@ -1,5 +1,6 @@
 # Site Configuration
-baseURL = 'http://example.org/'
+# Project site en GitHub Pages. El workflow vuelve a pasar --baseURL con la URL real de Pages.
+baseURL = 'https://oscararmas.github.io/mini-blog/'
 languageCode = 'en'
 title = 'Oscar A'
 # theme = 'ananke'  # Theme disabled - using custom template
@@ -28,36 +29,25 @@ title = 'Oscar A'
   
   # Bio Sections (Edit here to update homepage text)
   bio_intro = "I'm a Staff ML Engineer based in Mexico. I specialize in building infrastructure and services for scaling Startups or Huge Enterprises."
-  bio_current = "Currently working at [LexisNexis](https://www.lexisnexis.com/en-us/products/protege.page), focus on MLOps, and RAG Infrastructure."
-  bio_footer = "I have worked in high-performance teams on very know companies, and I love sharing knowledge, whether professional or from my projects like [@FakeGuru](https://fakeguru.ai) & [@MiniDrafts](https://minidrafts.com)"
-  
-  # Section Titles
-  projects_title = "Selected Projects"
+  bio_current = "Currently working at [LexisNexis](https://www.lexisnexis.com/en-us/products/protege.page), focused on MLOps and RAG infrastructure."
+  bio_footer = "I have worked on high-performance teams at well-known companies, and I love sharing knowledge, whether professional or from my projects like [@FakeGuru](https://fakeguru.ai) and [@MiniDrafts](https://minidrafts.com)."
 
   # Role Title (used in title tag)
   role_title = "Staff ML Engineer"
-  
+
   # Site Description (SEO)
   description = "Personal blog Specialized in ML, RAG and AI workflows."
-  
-  # Show recent posts on homepage
-  show_recent_posts = true
-  
-  # Legacy params (kept for compatibility if needed)
-  hero_title = "Building High-Scale<br>ML Infrastructure<br>That Ships."
-  hero_description = "Specialized in MLOps platforms, RAG, real-time inference systems..."
 
-  # Stats Bar (Legacy)
- [[params.stats]]
-   number = "6"
-   label = "Years of Experience"
- [[params.stats]]
-   number = "20+"
-   label = "Projects Completed"
- [[params.stats]]
-   number = "3"
-   label = "0→1 PLATFORMS"
+# Secciones de la home, en el orden en que se leen.
+# El orden dentro de cada sección lo marca home_order en el front matter.
+[[params.home_sections]]
+  id = "architecture"
+  title = "Architecture & Case Studies"
 
+[[params.home_sections]]
+  id = "essays"
+  title = "Essays & Thinking"
+ 
 [caches]
   [caches.images]
     dir = ':cacheDir/images'

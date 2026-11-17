@@ -7,6 +7,8 @@ description: "Designing a centralized platform to standardize machine learning d
 tags: ["platform", "mlops", "infrastructure"]
 categories: ["platform"]
 context: "Platform · MLOps"
+home_section: "architecture"
+home_order: 4
 metric: "0→1"
 metric_unit: "Zero to One"
 ---

@@ -1,0 +1,8 @@
+{{ if .Params.tags }}
+<div class="post-tags">
+    {{ range .Params.tags }}
+    {{/* urlize sigue la ruta de taxonomía de Hugo: "CI/CD" queda en /tags/ci/cd/ */}}
+    <a class="tag" href="{{ (printf "tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>
+    {{ end }}
+</div>
+{{ end }}

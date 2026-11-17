@@ -1,4 +1,11 @@
 <header class="home-header">
+    <nav class="home-nav" aria-label="Main">
+        {{ range .Site.Menus.main }}
+        {{ if ne .URL $.RelPermalink }}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+        {{ end }}
+        {{ end }}
+    </nav>
     <h1 class="friendly-title">{{ .Site.Params.greeting | default "Hi, I'm" }} {{ .Site.Params.author | default "Oscar A" }}.</h1>
     <div class="friendly-bio">
         {{ if .Site.Params.bio_intro }}

@@ -12,13 +12,7 @@
         • {{ .ReadingTime }} min read
         {{ end }}
     </div>
-    {{ if .Params.tags }}
-    <div class="post-tags" style="margin-bottom: 2rem;">
-        {{ range .Params.tags }}
-        <span class="tag">#{{ . }}</span>
-        {{ end }}
-    </div>
-    {{ end }}
+    {{ partial "post-tags.html" . }}
 </header>
 
 <section>

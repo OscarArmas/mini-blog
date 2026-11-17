@@ -7,6 +7,8 @@ description: "A blueprint for evolving CI/CD architectures. How to navigate the 
 tags: ["CI/CD", "Platform Engineering", "MLOps", "Architecture"]
 categories: ["leadership"]
 context: "Platform · MLOps"
+home_section: "architecture"
+home_order: 2
 metric: "Push"
 metric_unit: "ML Platforms"
 ---
