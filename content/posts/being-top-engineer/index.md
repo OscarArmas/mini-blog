@@ -5,7 +5,7 @@ date: 2025-06-25
 weight: 2
 author: "Oscar A"
 description: "What I learned and discover from excellent engineers"
-tags: ["Agency", "Ownership", "Top Engineers"]
+tags: ["Career", "Leadership"]
 categories: ["leadership"]
 context: "Platform · MLOps"
 home_section: "essays"

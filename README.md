@@ -38,11 +38,16 @@ categories: ["platform"]
 context: "Empresa · Área"
 metric: "200+"
 metric_unit: "RPS"
+images: ["diagrama.png"]
 draft: true
 ---
 ```
 
 `draft: true` oculta el post de la home y de las listas. Quítalo para publicarlo.
+
+`images` es la imagen que se ve al compartir el post (Open Graph). Si falta, se usa `params.images` de `hugo.toml`.
+
+Si renombras la carpeta de un post ya publicado, añade la URL vieja en `aliases` para que siga redirigiendo.
 
 Las imágenes van en la misma carpeta que el `index.md` y se referencian por nombre de archivo.
 

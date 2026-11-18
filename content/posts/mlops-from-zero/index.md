@@ -4,8 +4,9 @@ date: 2024-01-20
 weight: 1
 author: "Oscar A"
 description: "Designing a centralized platform to standardize machine learning deployments across the organization using Databricks and Terraform."
-tags: ["platform", "mlops", "infrastructure"]
+tags: ["MLOps", "Platform Engineering"]
 categories: ["platform"]
+images: ["open-s-infra.png"]
 context: "Platform · MLOps"
 home_section: "architecture"
 home_order: 4

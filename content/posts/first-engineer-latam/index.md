@@ -3,8 +3,9 @@ title: "Engineering Culture & Leadership"
 date: 2024-01-25
 author: "Oscar A"
 description: "Establishing engineering best practices, building internal tools, and contributing to staff-level technical decisions."
-tags: ["leadership", "Staffing", "Design Systems"]
+tags: ["Leadership", "MLOps"]
 categories: ["leadership"]
+images: ["kuberay-inference.png"]
 context: "LexisNexis · Leadership"
 home_section: "architecture"
 home_order: 3
