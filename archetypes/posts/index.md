@@ -5,6 +5,8 @@ author: "Oscar A"
 description: ""
 tags: []
 categories: []
+# Imagen al compartir el post; sin ella se usa params.images de hugo.toml.
+# images: ["diagrama.png"]
 context: ""
 metric: ""
 metric_unit: ""

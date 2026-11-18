@@ -4,7 +4,7 @@ date: 2026-11-17
 weight: 1
 author: "Oscar A"
 description: "Why the real bottleneck in building with AI isn’t bandwidth between brain and machine, but the resolution of our own thoughts."
-tags: ["AI", "Essays"]
+tags: ["AI"]
 categories: ["essays"]
 context: "AI · Essays"
 home_section: "essays"

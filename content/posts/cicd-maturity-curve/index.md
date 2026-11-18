@@ -4,8 +4,10 @@ date: 2025-06-25
 weight: 2
 author: "Oscar A"
 description: "A blueprint for evolving CI/CD architectures. How to navigate the shift from single repos to monorepos and eventually, platform engineering."
-tags: ["CI/CD", "Platform Engineering", "MLOps", "Architecture"]
+tags: ["Platform Engineering", "MLOps"]
 categories: ["leadership"]
+aliases: ["/posts/branch-strategys/"]
+images: ["monorepo.png"]
 context: "Platform · MLOps"
 home_section: "architecture"
 home_order: 2
@@ -57,6 +59,7 @@ Some projects can work very well with this way of deployment for a good time.
 Operations are trivial when maintaining a single service. In fact, probably we don't need CI/CD, CloudFormation, etc. Services are easy and not much traffic, we could do something like this:
 
 ![Manual deployment](manual-deployment.png)
+
 ---
 
 While technically imperfect, this approach optimizes for velocity the only metric that matters in early-stage startups

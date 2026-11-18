@@ -5,6 +5,9 @@ languageCode = 'en'
 title = 'Oscar A'
 # theme = 'ananke'  # Theme disabled - using custom template
 
+# Genera /robots.txt desde layouts/robots.txt (incluye la ruta del sitemap).
+enableRobotsTXT = true
+
 # Taxonomías nativas de Hugo (generan páginas en /categories/ y /tags/)
 [taxonomies]
   category = "categories"
@@ -37,6 +40,10 @@ title = 'Oscar A'
 
   # Site Description (SEO)
   description = "Personal blog Specialized in ML, RAG and AI workflows."
+
+  # Imagen por defecto al compartir un enlace (Open Graph, 1200x630, vive en static/).
+  # Un post usa la suya con `images` en el front matter.
+  images = ["images/page/og-default.png"]
 
 # Secciones de la home, en el orden en que se leen.
 # El orden dentro de cada sección lo marca home_order en el front matter.
