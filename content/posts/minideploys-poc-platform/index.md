@@ -14,44 +14,56 @@ metric: "PoC"
 metric_unit: "One Descriptor"
 ---
 
-Building a PoC is not the hard part anymore. With AI tools, almost anyone can put together an app with a frontend and a backend in a couple of days: AI workflows, evaluation tools, chats, agents, internal experiments.
+We are all using AI now. We have plenty of tools to generate apps and PoCs in a very simple and fast way, and people like data scientists, ML engineers and even product people are starting to program applications or want to run their own tests. For many of these tests, the pages that ChatGPT or Claude generate are enough, because they are static sites and they work pretty well to share inside an organization.
 
-The hard part is what comes next. Somebody has to deploy it.
+But then there is the other side: the PoCs that need services, databases and internal resources, and that many times people outside the infrastructure area want to deploy.
 
-And that’s where the problems start:
+In the company where I work we started to see a good number of projects that needed databases and running instances behind a load balancer. The problem? Many of these people, even with agents, can’t deploy services in a secure way, because inside the company there are a lot of acceptance and security criteria before deploying anything, PoC or formal service. And we end up with these problems:
 
-- Services that stay on with nobody using them.
-- Access to internal resources that nobody reviewed.
-- Demos that are still alive months later, with no owner.
+- Orphan services that nobody deletes.
+- A bunch of roles and stacks duplicated across all the tests.
+- A lot of time lost, error after error, creating the stacks and passing all the acceptance criteria, which of course an agent can’t catch on the first try.
 
-So as the person responsible for infrastructure, my question is simple: **how do we let people experiment fast without paying for it later?**
+![Three PoCs, each with its own load balancer and database, and nobody using them](before.png)
+
+So as the person responsible for infrastructure, **how do I make sure people can experiment fast without spending so many resources?**
 
 ---
 
 ## The Problem
 
-Imagine Ana, a data scientist with a working demo on her laptop. She needs a private URL for two weeks to show it to her team.
+We have some points in mind for every PoC:
 
-If I send her through the production process, the demo is old before it’s live. If I let her deploy however she wants, I get a new forgotten service every week.
+- Follow the SRE and security rules.
+- How long it will live.
+- When it has to be on. Many PoCs don’t need to run every day or on weekends.
+- Which internal resources it needs.
+- Deploy in a cost-efficient way.
+- Whether it can share resources with other PoCs.
 
-These are the questions I want answered for every PoC:
+And after the deploy, how do we keep control? If the PoC does its job, do we delete the resources or move it to a formal service?
 
-- Does it follow our SRE and security rules?
-- How long will it live?
-- When does it need to be on? Most PoCs don’t need nights or weekends.
-- Which internal resources does it need?
-- What can it share with other PoCs?
-- What happens after? If it works, do we delete it or move it to a formal service?
+Basically it’s very similar to a container auto-deploy system, but less demanding and with some advantages: we can share resources, and a PoC is meant to disappear.
 
-Yep, this looks a lot like any container auto-deploy system, and the mechanics are the same. The difference is the lifecycle: a PoC is less demanding than production, it shares resources by default, and it’s supposed to disappear.
+---
+
+## Why Not Let the AI Do Everything?
+
+Someone could tell me: we have AI, let it do everything. The detail is that these AIs don’t know our internal libraries or our internal criteria. They can understand what is on the internet, but the context of the company is spread across many systems, and not even we have it together to hand it over.
+
+The failure is a context failure. No matter how much we want an AI to do a deploy from zero following every readiness line, it’s very hard if we don’t have that context ourselves to feed it.
+
+That’s why the proposal is to build a platform, or a guide as defined as possible, to solve these deploys only once, and then give the agents a simplified guide of how to deploy.
+
+The platform is in charge of abstracting all these steps. Here I focus on the architecture of the proposal. Every company has its own requirements, but the architecture is very similar.
 
 ---
 
 ## The First Version: One Stack per PoC
 
-Let’s start with the contract. I ask the user for a short descriptor: name, port, health check path, CPU, memory, scaling, and the resources the app needs. That’s it.
+What I’d call the PoC Platform needs basically three things: containers, shared resources and a shared base infrastructure.
 
-This is the whole thing, trimmed of the internal identifiers:
+The responsibility of the agent or the user is now only two things: a container image, and a file with the requirements of the PoC. For example:
 
 ```yaml
 kind: PocService
@@ -70,7 +82,7 @@ spec:
     - type: documentdb
 ```
 
-No subnets, no roles, no certificates, no load balancer. If a field is not there, the team can’t get it wrong.
+As we can see, we avoid writing subnets, roles, certificates, the load balancer and so on. All of that is already abstracted in the platform, so the user can’t get it wrong, and an agent can’t either.
 
 A deploy needs three inputs:
 
@@ -82,13 +94,13 @@ The resources part is a list of needs, not of infrastructure. The descriptor say
 
 The result is one stack per PoC. Each one has its own image, its own stack and its own private URL, and it deploys without touching the others.
 
-That works because there are three layers, and each one changes at a different speed:
+The three main layers are:
 
 - **Shared resources.** A database, a cache. Each one has its own pipeline and its own stack, and it exists before any PoC does. The platform doesn’t create them or delete them. It only knows where they are.
 - **The foundation.** Roles, network access to those resources, and the automation for domains and access. It’s deployed once per environment.
 - **The PoC stack.** The service, its URL, and its access to the resources it declared. It’s created and deleted many times.
 
-So a PoC never gets a database, it gets **access** to one that is already there. When we delete the PoC the access goes away, and the database doesn’t even notice.
+So with these layers no PoC receives a database. It receives **access** to one that already exists, and when the PoC disappears the access is removed and the shared resource keeps going. That is the design. Today the pilot only has shared network access, and the per-PoC access is the part I describe below.
 
 The deploy doesn’t care where the code comes from. The app can live in the same repo or be built somewhere else and only hand over an image. That second mode is designed, but I haven’t exercised it yet.
 
@@ -102,7 +114,7 @@ We end up with something like this:
 
 ## What AWS Gives You, and What I Had to Add
 
-Here I have to be fair with AWS: a lot of what looks like platform work is already done by Express Mode. From an image it creates the service, the load balancer with HTTPS, the routing rules, autoscaling, logs and a canary deployment with a rollback alarm. It also reuses the same load balancer for services in the same network, up to 25 according to the docs, with no extra charge on top of the resources.
+For this test we wanted to abstract several of those problems with ECS Express Mode, which is basically a simpler way to deploy on ECS. From an image it creates the service, and the routing rules, the autoscaling, the logs and the gradual deployment with its rollback alarm are already solved. It also reuses one load balancer for all the PoCs in the same network, up to 25 according to the docs, so we don’t create a different one for each.
 
 So what was left for me?
 
@@ -117,9 +129,9 @@ One detail I wish I knew before starting: the first service you create in a netw
 
 ## Access Without Passing Secrets Around
 
-A PoC that needs a database shouldn’t need a person to create a user and paste a password somewhere.
+Another thing to take into account: we have to manage the secrets to reach resources like databases.
 
-The flow is the same one I use for the domain name: a small function that acts when the stack is created and cleans up when it’s deleted.
+If the PoC declares that it needs a database, nobody should create a user by hand or paste a password in a chat. The flow is the same one I use for the domain name, a small function that acts when the stack is created and cleans up when it’s deleted:
 
 1. The descriptor declares the need.
 2. The stack generates a password and stores it as a secret, named after the PoC.
@@ -156,13 +168,7 @@ I kept the pilot small on purpose. These are the decisions I took, and how I’l
 
 ## Built for Agents Too
 
-There is one more reason I like this approach, and it’s not about cost.
-
-Most PoCs today are written with coding agents. They are very good at writing the app. They are not good at knowing how *your* company deploys things.
-
-The model is not the problem here. The missing context is.
-
-In a big company the knowledge is everywhere: repositories, documentation, pipelines, tracing, deployment systems. No agent has all of that, and probably never will. A big part of an engineer’s job today is pointing the agent to the right place.
+I said at the start that the failure is a context failure. This is where the platform helps.
 
 A platform changes the question. The agent doesn’t need to understand our network, our roles, our DNS or our tagging rules. It needs to read one README and fill one descriptor with about ten fields.
 
