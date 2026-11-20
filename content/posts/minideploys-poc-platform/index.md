@@ -24,7 +24,7 @@ And that’s where the problems start:
 - Access to internal resources that nobody reviewed.
 - Demos that are still alive months later, with no owner.
 
-So as the person responsible for infrastructure, my question is simple: how do I let people experiment fast without paying for it later?
+So as the person responsible for infrastructure, my question is simple: **how do we let people experiment fast without paying for it later?**
 
 ---
 
@@ -43,13 +43,13 @@ These are the questions I want answered for every PoC:
 - What can it share with other PoCs?
 - What happens after? If it works, do we delete it or move it to a formal service?
 
-This looks a lot like any container auto-deploy system. The mechanics are the same. The difference is the lifecycle: a PoC is less demanding than production, it shares resources by default, and it’s supposed to disappear.
+Yep, this looks a lot like any container auto-deploy system, and the mechanics are the same. The difference is the lifecycle: a PoC is less demanding than production, it shares resources by default, and it’s supposed to disappear.
 
 ---
 
 ## The First Version: One Stack per PoC
 
-I ask the user for a short descriptor: name, port, health check path, CPU, memory and scaling. That’s it.
+Let’s start with the contract. I ask the user for a short descriptor: name, port, health check path, CPU, memory, scaling, and the resources the app needs. That’s it.
 
 A deploy needs three inputs:
 
@@ -57,11 +57,23 @@ A deploy needs three inputs:
 - A container image pinned by digest, not by a tag that can change.
 - The version of the infrastructure template.
 
-The result is one stack per PoC. Each one has its own image, its own stack and its own private URL, and it deploys without touching the others. Below that there is a shared foundation that is deployed once: roles, network access to existing dependencies, and the domain automation.
+The resources part is a list of needs, not of infrastructure. The descriptor says “I need a document database”. It doesn’t say how to build one, and a PoC never creates one.
+
+The result is one stack per PoC. Each one has its own image, its own stack and its own private URL, and it deploys without touching the others.
+
+That works because there are three layers, and each one changes at a different speed:
+
+- **Shared resources.** A database, a cache. Each one has its own pipeline and its own stack, and it exists before any PoC does. The platform doesn’t create them or delete them. It only knows where they are.
+- **The foundation.** Roles, network access to those resources, and the automation for domains and access. It’s deployed once per environment.
+- **The PoC stack.** The service, its URL, and its access to the resources it declared. It’s created and deleted many times.
+
+So a PoC never gets a database, it gets **access** to one that is already there. When we delete the PoC the access goes away, and the database doesn’t even notice.
 
 The deploy doesn’t care where the code comes from. The app can live in the same repo or be built somewhere else and only hand over an image. That second mode is designed, but I haven’t exercised it yet.
 
 Today there are two PoCs running like this on ECS Express Mode and Fargate, sharing the network and the load balancer.
+
+We end up with something like this:
 
 ![How a PoC gets its own private URL](architecture.png)
 
@@ -69,7 +81,7 @@ Today there are two PoCs running like this on ECS Express Mode and Fargate, shar
 
 ## What AWS Gives You, and What I Had to Add
 
-A lot of what looks like platform work is already done by Express Mode. From an image it creates the service, the load balancer with HTTPS, the routing rules, autoscaling, logs and a canary deployment with a rollback alarm. It also reuses the same load balancer for services in the same network, up to 25 according to the docs, with no extra charge on top of the resources.
+Here I have to be fair with AWS: a lot of what looks like platform work is already done by Express Mode. From an image it creates the service, the load balancer with HTTPS, the routing rules, autoscaling, logs and a canary deployment with a rollback alarm. It also reuses the same load balancer for services in the same network, up to 25 according to the docs, with no extra charge on top of the resources.
 
 So what was left for me?
 
@@ -82,11 +94,32 @@ One detail I wish I knew before starting: the first service you create in a netw
 
 ---
 
+## Access Without Passing Secrets Around
+
+A PoC that needs a database shouldn’t need a person to create a user and paste a password somewhere.
+
+The flow is the same one I use for the domain name: a small function that acts when the stack is created and cleans up when it’s deleted.
+
+1. The descriptor declares the need.
+2. The stack generates a password and stores it as a secret, named after the PoC.
+3. The function creates a user for that PoC, with access to its own database and nothing else.
+4. The container starts with the host, the user and the database as environment variables, and the password injected from the secret.
+
+The app just reads five variables. Nobody sees the password, and nobody pastes it in a chat (we all have seen that).
+
+The user and the database are derived from the PoC name inside the platform. The descriptor can’t choose them, and it can’t point at another PoC’s secret. When the PoC is deleted, the user and the secret go with it. The data stays, because dropping a database should be a decision and not a side effect of a rollback.
+
+This part is written, but not deployed yet. It’s the first thing I turn on before accepting a PoC with real data.
+
+---
+
 ## Scope Decisions: What I Left Out on Purpose
 
-I kept the pilot small on purpose. These are the decisions, and how I’ll evaluate each one.
+I kept the pilot small on purpose. These are the decisions I took, and how I’ll evaluate each one.
 
-**Deploy isolation first, data isolation later.** The pilot proves that each app deploys and retires without affecting the others. Data access today is network-only and shared. Per-app credentials are a requirement before accepting any PoC with real data.
+**Deploy isolation first, data isolation later.** The pilot proves that each app deploys and retires without affecting the others. Data access in the pilot is network-only and shared. Per-app credentials are the next deploy, and the network path stays shared after that: isolation is by credential, not by network.
+
+**Shared by default, dedicated by exception.** A PoC that needs a database gets its own space inside an instance that already exists. A dedicated instance takes longer to create, costs money from minute one and doesn’t turn off at night, so it has to be justified. The same pattern applies to a SQL database or a cache when the first PoC asks for one.
 
 **Scheduling is a cost hypothesis, not a feature.** At list prices, the shared load balancer costs about the same as the compute of two small services, and it doesn’t turn off at night. Spoiler: with two PoCs, night shutdown saves very little. It only makes sense with more apps, so before building it I’ll measure three things: whether the service can reach zero tasks, what happens when you deploy while it’s off, and how long it takes to come back.
 
@@ -104,7 +137,7 @@ There is one more reason I like this approach, and it’s not about cost.
 
 Most PoCs today are written with coding agents. They are very good at writing the app. They are not good at knowing how *your* company deploys things.
 
-And that’s not a model problem. It’s a context problem.
+The model is not the problem here. The missing context is.
 
 In a big company the knowledge is everywhere: repositories, documentation, pipelines, tracing, deployment systems. No agent has all of that, and probably never will. A big part of an engineer’s job today is pointing the agent to the right place.
 
@@ -118,18 +151,18 @@ Here’s what that means in practice:
 
 I haven’t tested this yet. The next experiment is simple: give an agent only the README and the descriptor, and see if it can deploy a new PoC without me.
 
-So we stop teaching every agent how the company works. We build the safe path once and let them follow it.
+The idea is that we stop teaching every agent how the company works. We build the safe path once, and people and agents just follow it.
 
 ---
 
 ## Final Thoughts
 
-1. Start with the contract: one descriptor, one image, one template version.
-2. Share what is boring: network, load balancer, roles.
-3. Keep separate what is risky: data access and credentials.
-4. Give every PoC an owner and an end date.
-5. Write the guideline so an agent can follow it.
+1. **Start with the contract:** one descriptor, one image, one template version.
+2. **Share what is boring:** network, load balancer, roles.
+3. **Keep separate what is risky:** data access and credentials.
+4. **Give every PoC an owner and an end date.**
+5. **Write the guideline so an agent can follow it.**
 
 Number four is the real difference with a production pipeline. Production assumes things live forever. A PoC should be born with an expiration date, and retire on its own if nobody renews it.
 
-The goal isn’t to build another CI/CD system. It’s to make experiments cheap to start and easy to kill.
+The goal isn’t to build another CI/CD system, but to make experiments cheap to start and easy to kill.
