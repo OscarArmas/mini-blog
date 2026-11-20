@@ -51,6 +51,27 @@ Yep, this looks a lot like any container auto-deploy system, and the mechanics a
 
 Let’s start with the contract. I ask the user for a short descriptor: name, port, health check path, CPU, memory, scaling, and the resources the app needs. That’s it.
 
+This is the whole thing, trimmed of the internal identifiers:
+
+```yaml
+kind: PocService
+metadata:
+  name: hello-poc
+spec:
+  runtime:
+    port: 8080
+    healthCheckPath: /health
+    cpu: '256'
+    memory: '512'
+  scaling:
+    minTasks: 1
+    maxTasks: 2
+  resources:
+    - type: documentdb
+```
+
+No subnets, no roles, no certificates, no load balancer. If a field is not there, the team can’t get it wrong.
+
 A deploy needs three inputs:
 
 - The descriptor.
@@ -126,6 +147,8 @@ I kept the pilot small on purpose. These are the decisions I took, and how I’l
 **Being off has a user cost.** A request outside the schedule gets an error, because nothing wakes the service when traffic arrives. That’s fine for a demo and not for a formal service, so the schedule will be optional per app.
 
 **The custom domain modifies a managed resource.** I chose it because it’s the simplest way to give each app an internal name. The risk is that this behavior isn’t documented, so the rule is reapplied on every new image deploy and the generated URL stays as a fallback.
+
+**The end date is not built yet, and this is how I’ll do it.** The descriptor gets one more field, `expiresAt`, and the deploy writes it as a tag on the PoC stack. A scheduled job lists the stacks, warns the owner a few days before, and deletes the stack if nobody renews it. Deleting is already safe, because the stack removes its own URL, its access and its secret. What I still have to decide is the default: I’m thinking 30 days, renewable by changing one line.
 
 **The success metric is adoption, not deployment.** Two running apps prove the design. It becomes a platform the day another team, or their agent, deploys without my help in less than half a day.
 
