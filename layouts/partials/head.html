@@ -3,6 +3,33 @@
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 <title>{{ if .IsHome }}{{ .Site.Title }} | {{ .Site.Params.role_title | default "Staff ML Engineer" }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<link rel="canonical" href="{{ .Permalink }}">
 <link rel="icon" type="image/svg+xml" href="{{ "images/page/favicon.svg" | relURL }}">
+{{/* El feed del sitio se enlaza desde todas las páginas, no solo desde las que generan RSS. */}}
+{{ with site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{ end }}
+
+{{/*
+  Vista previa al compartir el enlace (LinkedIn, Slack, X). La imagen sale de `images`
+  en el front matter del post y, si falta, de params.images en hugo.toml.
+*/}}
+{{ partial "opengraph.html" . }}
+{{ partial "twitter_cards.html" . }}
+
+{{ if .IsPage }}
+<script type="application/ld+json">
+{{ dict
+    "@context" "https://schema.org"
+    "@type" "BlogPosting"
+    "headline" .Title
+    "description" .Description
+    "datePublished" (.Date.Format "2006-01-02")
+    "dateModified" (.Lastmod.Format "2006-01-02")
+    "url" .Permalink
+    "author" (dict "@type" "Person" "name" (.Params.author | default site.Params.author) "url" site.Home.Permalink)
+  | jsonify | safeJS }}
+</script>
+{{ end }}
 
 {{ partial "theme-init.html" . }}

@@ -1,0 +1,7 @@
+{{- /* Imágenes de un post: width/height evitan que la página salte al cargarlas. SVG no tiene dimensiones. */ -}}
+{{- $img := .PageInner.Resources.Get .Destination -}}
+{{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") -}}
+<img src="{{ $img.RelPermalink }}" alt="{{ .PlainText }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy">
+{{- else -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}">
+{{- end -}}
