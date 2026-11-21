@@ -63,6 +63,8 @@ So how would we solve all this? This is where sharing resources starts to make s
 
 On one side we’d have independent CloudFormation stacks for the resources themselves. A database would have its own stack, Redis would have another, and we’d have a stack for the shared load balancer. Together they’d serve a whole group of PoCs. On the other side we’d have the platform stacks that connect each new PoC to whatever it needs. Say your demo needs a database and an internal domain. The platform would set up access to the database, attach the certificate and tell the shared load balancer where to send requests for that domain.
 
+![How a PoC gets its own private URL](architecture.png)
+
 I’d also like us to be able to schedule when a service starts and when it shuts down. Suppose you bring us a PoC that needs to run for the next three months. You could set the end date when you deploy it and ask for an email when it shuts down, so you know when to renew it if you still need it.
 
 The tricky part is getting the platform to do all of that behind the scenes. If a PoC asks for database access, what creates its user and how does the app get the secret it needs to connect? When another PoC joins the same load balancer, how do we map its domain to the right service? Those are the pieces we have to work out so the next team can bring us a demo and tell us what it needs.
