@@ -59,49 +59,10 @@ The platform is in charge of abstracting all these steps. Here I focus on the ar
 
 ## The First Version: One Stack per PoC
 
-What I’d call the PoC Platform needs basically three things: containers, shared resources and a shared base infrastructure.
+So how would we solve all this? This is where sharing resources starts to make sense. If we keep giving every PoC its own database, cache and load balancer, every new demo gives us another set of services to look after. What I have in mind is a shared setup that can serve several PoCs at once.
 
-The responsibility of the agent or the user is now only two things: a container image, and a file with the requirements of the PoC. For example:
+On one side we’d have independent CloudFormation stacks for the resources themselves. A database would have its own stack, Redis would have another, and we’d have a stack for the shared load balancer. Together they’d serve a whole group of PoCs. On the other side we’d have the platform stacks that connect each new PoC to whatever it needs. Say your demo needs a database and an internal domain. The platform would set up access to the database, attach the certificate and tell the shared load balancer where to send requests for that domain.
 
-```yaml
-kind: PocService
-metadata:
-  name: hello-poc
-spec:
-  runtime:
-    port: 8080
-    healthCheckPath: /health
-    cpu: '256'
-    memory: '512'
-  scaling:
-    minTasks: 1
-    maxTasks: 2
-  resources:
-    - type: documentdb
-```
+I’d also like us to be able to schedule when a service starts and when it shuts down. Suppose you bring us a PoC that needs to run for the next three months. You could set the end date when you deploy it and ask for an email when it shuts down, so you know when to renew it if you still need it.
 
-We have two PoCs running on Fargate today. Say the first one is mine and you’re bringing up the second. My app is already serving traffic, so there’s a load balancer sitting there that you can use too. There’s one detail for whoever sets up the platform. ECS Express Mode needs your service in the same subnets as that balancer. If you’re the person who just came here to try a demo, why would I send you off to find the subnet IDs? We already know which ones to use.
-
-Now you’ve changed your app and want to try the new container. Go ahead, give your deploy the new image digest or tag. My demo can carry on running. We keep the code for both images in a monorepo at the moment, so it’s easy to assume they have to go out together. They have separate stacks. We’re also trying out separate repos, which means pointing each deploy at the image its team built over there.
-
-![How a PoC gets its own private URL](architecture.png)
-
-Once your service is up you can already open the address Express Mode gives you. So what’s that function doing in the diagram? That’s for the address we actually want to send to people, the one under our company domain. On every image deploy the CloudFormation stack runs a function to add our name to the load balancer rule and attach the certificates. Try the address Express gave you afterwards and it still works.
-
-One more thing to look at in the YAML above is the request for DocumentDB. You can ask for a database, or for Redis if your app needs a cache. Each shared service has a stack of its own. Go ahead and delete the stack for `hello-poc` once you’re done with it. Its internal URL goes away along with the certificate configuration for that name. The team using the same database for their own PoC can keep working.
-
-## Access Without Passing Secrets Around
-
-Another thing to take into account: we have to manage the secrets to reach resources like databases.
-
-Today both demos can reach the database over the shared network. Now suppose your team loads some data this week and takes the demo down next week. I need a way to take your app’s access away while the team across from you is still using the database.
-
-Here’s what we’ve been trying with `hello-poc`. Its stack creates a database user and generates the password. When the container starts it gets the password from a secret and signs in with that user. Delete the stack and both the user and the secret are gone. What if you have to show the demo again a week later? Deploy it again. The data you spent time loading the first time is still in the database.
-
-## Do we turn it off on Friday?
-
-With the two PoCs we have now, I’d leave them running. People actually use them on weekends, for one thing. And even if everybody goes home on Friday and we stop both services, we still have a load balancer to pay for on Saturday. As we put more services on it, the compute for all those idle apps starts adding up. Then it’s worth finding out which ones can sleep through the weekend.
-
-What I would like to try even with just two demos is an end date. Put an `expiresAt` tag on the stack and let the person responsible pick the day. A few days before it’s due to shut down, send them an email. Maybe the experiment is finished and we can take it down. Maybe they have one last demo booked for next week (there’s always one more demo). Give them time to renew it.
-
-The test I want to run next needs somebody from another team. Give them the README, show them what goes in the YAML and let them try it with their own service. I’d expect them to have it running pretty quickly. If they have to come looking for me to ask which load balancer to use or how to set up security, I’ve left part of my job in their hands. Then I’d give a coding agent those same instructions and see if it can get a service up by itself.
+The tricky part is getting the platform to do all of that behind the scenes. If a PoC asks for database access, what creates its user and how does the app get the secret it needs to connect? When another PoC joins the same load balancer, how do we map its domain to the right service? Those are the pieces we have to work out so the next team can bring us a demo and tell us what it needs.
