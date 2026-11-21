@@ -1,5 +1,5 @@
 ---
-title: "MiniDeploys: Shipping PoCs Without Turning Them Into Infrastructure Projects"
+title: "Deploying lot of PoCs without losing control"
 date: 2026-11-19
 weight: 1
 author: "Oscar A"
